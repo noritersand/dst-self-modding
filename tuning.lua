@@ -51,7 +51,7 @@ function Tune(overrides)
 
     local MY_PERISHTIME_MODIFIER = 4
     local MY_LIGHTTIME_MODIFIER = 3
-    local MY_FULE_MODIFIER = 2
+    local MY_FULE_MODIFIER = 3
 
     TUNING =
     {
@@ -1583,11 +1583,16 @@ function Tune(overrides)
 
         WET_FUEL_PENALTY = 0.75,
 
-        TINY_FUEL = seg_time*.25,
-        SMALL_FUEL = seg_time * .5,
-        MED_FUEL = seg_time * 1.5,
-        MED_LARGE_FUEL = seg_time * 3,
-        LARGE_FUEL = seg_time * 6,
+        -- TINY_FUEL = seg_time*.25,
+        -- SMALL_FUEL = seg_time * .5,
+        -- MED_FUEL = seg_time * 1.5,
+        -- MED_LARGE_FUEL = seg_time * 3,
+        -- LARGE_FUEL = seg_time * 6,
+        TINY_FUEL = seg_time*.25 * MY_FULE_MODIFIER,
+        SMALL_FUEL = seg_time * .5 * MY_FULE_MODIFIER,
+        MED_FUEL = seg_time * 1.5 * MY_FULE_MODIFIER,
+        MED_LARGE_FUEL = seg_time * 3 * MY_FULE_MODIFIER,
+        LARGE_FUEL = seg_time * 6 * MY_FULE_MODIFIER,
 
         TINY_BURNTIME = seg_time*.1,
         SMALL_BURNTIME = seg_time*.25,
