@@ -27,6 +27,8 @@ local function make_turf(tile, data)
 
         MakeInventoryPhysics(inst)
 
+        inst.pickupsound = data.pickupsound or nil
+
         inst.AnimState:SetBank(data.bank_override or data.bank_build)
         inst.AnimState:SetBuild(data.build_override or data.bank_build)
         inst.AnimState:PlayAnimation(data.anim)
@@ -38,6 +40,8 @@ local function make_turf(tile, data)
         inst:AddTag("molebait")
 
         MakeInventoryFloatable(inst, "med", nil, 0.65)
+
+        inst.scrapbook_specialinfo = "TURF"
 
         inst.entity:SetPristine()
 

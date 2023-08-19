@@ -16,6 +16,16 @@ local prefabs =
 	"carrot",
 }
 
+local scrapbook_removedeps =
+{
+	"berries",
+	"cave_banana",
+	"cactus_meat",
+	"berries_juicy",
+	"fig",
+	"kelp",
+}
+
 for k,v in pairs(VEGGIES) do
     table.insert(prefabs, k)
 	if v.seed_weight ~= nil and v.seed_weight > 0 then
@@ -106,10 +116,12 @@ local function common(anim, cookable, oceanfishing_lure)
     MakeSmallPropagator(inst)
     MakeHauntableLaunchAndPerish(inst)
 
-    -- inst:AddComponent("perishable")
-    -- inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
-    -- inst.components.perishable:StartPerishing()
-    -- inst.components.perishable.onperishreplacement = "spoiled_food"
+    inst:AddComponent("perishable")
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
+    inst.components.perishable:StartPerishing()
+    inst.components.perishable.onperishreplacement = "spoiled_food"
+
+    inst.scrapbook_removedeps = scrapbook_removedeps
 
     return inst
 end

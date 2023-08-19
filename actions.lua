@@ -285,8 +285,8 @@ ACTIONS =
     UNLOCK = Action(),
     USEKLAUSSACKKEY = Action(),
     TEACH = Action({ mount_valid=true }),
-    TURNON = Action({ priority=2 }),
-    TURNOFF = Action({ priority=2 }),
+    TURNON = Action({ priority=2, invalid_hold_action = true, }),
+    TURNOFF = Action({ priority=2, invalid_hold_action = true, }),
     SEW = Action({ mount_valid=true }),
     STEAL = Action(),
     USEITEM = Action({ priority=1, instant=true }),
@@ -349,7 +349,7 @@ ACTIONS =
     ABANDON = Action({ rmb=true }),
     PET = Action(),
     DISMANTLE = Action({ rmb=true }),
-    TACKLE = Action({ rmb=true, distance=math.huge }),
+    TACKLE = Action({ rmb=true, distance=math.huge, invalid_hold_action = true, }),
 	GIVE_TACKLESKETCH = Action(),
 	REMOVE_FROM_TROPHYSCALE = Action(),
 	CYCLE = Action({ rmb=true, priority=2 }),
@@ -488,6 +488,10 @@ ACTIONS =
 	CLOSESPELLBOOK = Action({ instant = true, mount_valid = true }),
 	CAST_SPELLBOOK = Action({ mount_valid = true }),
 
+    -- WOODIE
+    USE_WEREFORM_SKILL = Action({ rmb=true, distance=math.huge }),
+
+    -- Rifts
     SCYTHE = Action({ rmb=true, distance=1.8, rangecheckfn=DefaultRangeCheck, invalid_hold_action=true }),
 	SITON = Action(),
 }
@@ -690,20 +694,27 @@ ACTIONS.REPAIR.strfn = function(act)
 end
 
 ACTIONS.REPAIR.fn = function(act)
-    if act.target ~= nil and act.target.components.repairable ~= nil then
-        local material
-        if act.doer ~= nil and
-            act.doer.components.inventory ~= nil and
-            act.doer.components.inventory:IsHeavyLifting() and
-            not (act.doer.components.rider ~= nil and
-                act.doer.components.rider:IsRiding()) then
-            material = act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
-        else
-            material = act.invobject
-        end
-        if material ~= nil and material.components.repairer ~= nil then
-            return act.target.components.repairable:Repair(act.doer, material)
-        end
+	if act.target ~= nil then
+		if act.target.components.repairable ~= nil then
+			local material
+			if act.doer ~= nil and
+				act.doer.components.inventory ~= nil and
+				act.doer.components.inventory:IsHeavyLifting() and
+				not (act.doer.components.rider ~= nil and
+				act.doer.components.rider:IsRiding()) then
+				material = act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+			else
+				material = act.invobject
+			end
+			if material ~= nil and material.components.repairer ~= nil then
+				return act.target.components.repairable:Repair(act.doer, material)
+			end
+		elseif act.target.components.forgerepairable ~= nil then
+			local material = act.invobject
+			if material ~= nil and material.components.forgerepair ~= nil then
+				return act.target.components.forgerepairable:Repair(act.doer, material)
+			end
+		end
     end
 end
 
@@ -845,9 +856,6 @@ ACTIONS.LOOKAT.fn = function(act)
 				) then
 					act.doer.components.locomotor:Stop()
 				end
-                if ThePlayer == act.doer then
-                    TheScrapbookPartitions:SetInspectedByCharacter(targ.prefab, ThePlayer.prefab)
-                end
 				if act.doer.components.talker ~= nil then
 					act.doer.components.talker:Say(desc, nil, targ.components.inspectable.noanim, nil, nil, nil, text_filter_context, original_author)
 				end
@@ -1170,14 +1178,14 @@ local function DoToolWork(act, workaction)
 
 		local numworks =
 			(	(	act.invobject ~= nil and
-				act.invobject.components.tool ~= nil and
-				act.invobject.components.tool:GetEffectiveness(workaction)
-			) or
-			(	act.doer ~= nil and
-				act.doer.components.worker ~= nil and
-				act.doer.components.worker:GetEffectiveness(workaction)
-			) or
-			1
+					act.invobject.components.tool ~= nil and
+					act.invobject.components.tool:GetEffectiveness(workaction)
+				) or
+				(	act.doer ~= nil and
+					act.doer.components.worker ~= nil and
+					act.doer.components.worker:GetEffectiveness(workaction)
+				) or
+				1
 			) *
 			(	act.doer.components.workmultiplier ~= nil and
 				act.doer.components.workmultiplier:GetMultiplier(workaction) or
@@ -1186,13 +1194,20 @@ local function DoToolWork(act, workaction)
 
 		local recoil
 		recoil, numworks = act.target.components.workable:ShouldRecoil(act.doer, act.invobject, numworks)
+
+		if act.doer.components.workmultiplier ~= nil then
+			numworks = act.doer.components.workmultiplier:ResolveSpecialWorkAmount(workaction, act.target, act.invobject, numworks, recoil)
+		end
+
 		if recoil and act.doer.sg ~= nil and act.doer.sg.statemem.recoilstate ~= nil then
 			act.doer.sg:GoToState(act.doer.sg.statemem.recoilstate, { target = act.target })
 			if numworks == 0 then
 				act.doer:PushEvent("tooltooweak", { workaction = workaction })
 			end
 		end
-		act.target.components.workable:WorkedBy(act.doer, numworks)
+		--V2C: Call the "internal" function directly since we've already accounted for recoil.
+		--     Chose the "internal" naming to discourage more places from calling it directly.
+		act.target.components.workable:WorkedBy_Internal(act.doer, numworks)
         return true
     end
     return false
@@ -2086,6 +2101,17 @@ ACTIONS.SHAVE.fn = function(act)
             end
         end
     end
+end
+
+ACTIONS.PLAY.strfn = function(act)
+	if act.invobject ~= nil then
+		if act.invobject:HasTag("coach_whistle") then
+			if act.doer:HasTag("wolfgang_coach") and act.doer:HasTag("mightiness_normal") then
+				return act.doer:HasTag("coaching") and "COACH_OFF" or "COACH_ON"
+			end
+			return "TWEET"
+		end
+	end
 end
 
 ACTIONS.PLAY.fn = function(act)
@@ -3167,7 +3193,8 @@ ACTIONS.CONSTRUCT.strfn = function(act)
                 (act.target:HasTag("constructionsite")      and "STORE")
             )
         or  (
-                (act.target:HasTag("offerconstructionsite") and "OFFER_TO")
+				(act.target:HasTag("offerconstructionsite") and "OFFER_TO") or
+				(act.target:HasTag("repairconstructionsite") and "REPAIR")
             )
         or nil
 end
@@ -3185,11 +3212,6 @@ ACTIONS.CONSTRUCT.fn = function(act)
         --Silent fail for construction in the dark
         if not CanEntitySeeTarget(act.doer, target) then
             return true
-        end
-
-        -- DANY: open sound here.
-        if act.doer == ThePlayer then
-            act.doer.SoundEmitter:PlaySound("dontstarve/wilson/chest_open")
         end
 
         local item = act.invobject
@@ -3245,24 +3267,23 @@ ACTIONS.STOPCONSTRUCTION.stroverridefn = function(act)
 end
 
 ACTIONS.STOPCONSTRUCTION.strfn = function(act)
-    return
-        (
-            (act.target:HasTag("offerconstructionsite") and "OFFER")
-        )
-    or nil
+	return (act.target:HasTag("offerconstructionsite") and "OFFER")
+		or (act.target:HasTag("repairconstructionsite") and "REPAIR")
+		or nil
 end
 
 ACTIONS.STOPCONSTRUCTION.fn = function(act)
     if act.doer ~= nil and act.doer.components.constructionbuilder ~= nil then
         act.doer.components.constructionbuilder:StopConstruction()
-
-        -- DANY: close sound here.
-        if act.doer == ThePlayer then
-            act.doer.SoundEmitter:PlaySound("dontstarve/wilson/chest_close")
-        end
-
     end
     return true
+end
+
+ACTIONS.APPLYCONSTRUCTION.strfn = function(act)
+	print(act.target, act.target:HasTag("repairconstructionsite"))
+	return (act.target:HasTag("offerconstructionsite") and "OFFER")
+		or (act.target:HasTag("repairconstructionsite") and "REPAIR")
+		or nil
 end
 
 ACTIONS.APPLYCONSTRUCTION.fn = function(act)
@@ -4612,4 +4633,8 @@ ACTIONS.SITON.fn = function(act)
 			return true
 		end
 	end
+end
+
+ACTIONS.USE_WEREFORM_SKILL.fn = function(act)
+    return act.doer ~= nil and act.doer:UseWereFormSkill(act)
 end

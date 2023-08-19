@@ -729,8 +729,10 @@ end
 local function OnSaddleChanged(inst, data)
     if data.saddle ~= nil then
         inst:AddTag("companion")
+		inst:AddTag("notraptrigger")
     else
         inst:RemoveTag("companion")
+		inst:RemoveTag("notraptrigger")
     end
 end
 
@@ -880,6 +882,16 @@ local function onclothingchanged(inst,data)
     end
 end
 
+local function PoopOnSpawned(inst, poop)
+    local heading_angle = -(inst.Transform:GetRotation()) + 180
+
+    local pos = Vector3(inst.Transform:GetWorldPosition())
+    pos.x = pos.x + (math.cos(heading_angle*DEGREES))
+    pos.y = pos.y + 0.8
+    pos.z = pos.z + (math.sin(heading_angle*DEGREES))
+    poop.Transform:SetPosition(pos.x, pos.y, pos.z)
+end
+
 local function beefalo()
     local inst = CreateEntity()
 
@@ -901,6 +913,8 @@ local function beefalo()
     inst.AnimState:AddOverrideBuild("beefalo_carrat_idles")
     inst.AnimState:PlayAnimation("idle_loop", true)
     inst.AnimState:Hide("HEAT")
+
+    inst.scrapbook_specialinfo = "BEEFALO"
 
     inst.MiniMapEntity:SetIcon("beefalo_domesticated.png")
     inst.MiniMapEntity:SetEnabled(false)
@@ -1010,6 +1024,7 @@ local function beefalo()
     inst.components.periodicspawner:SetDensityInRange(20, 2)
     inst.components.periodicspawner:SetMinimumSpacing(8)
 	inst.components.periodicspawner:SetSpawnTestFn(CanSpawnPoop)
+    inst.components.periodicspawner:SetOnSpawnFn(PoopOnSpawned)
     inst.components.periodicspawner:Start()
 
 

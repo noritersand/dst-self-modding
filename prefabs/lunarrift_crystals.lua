@@ -76,7 +76,11 @@ end
 
 --------------------------------------------------------------------------
 local function ShouldRecoil(inst, worker, tool, numworks)
-	if worker ~= nil and inst.components.workable:GetWorkLeft() > math.max(1, numworks) and not (tool ~= nil and tool.components.tool ~= nil and tool.components.tool:GetEffectiveness(ACTIONS.MINE) > 1) then
+	if inst.components.workable:GetWorkLeft() > math.max(1, numworks) and
+		not (worker ~= nil and (worker:HasTag("toughworker") or worker:HasTag("explosive"))) and
+		not (tool ~= nil and tool.components.tool ~= nil and tool.components.tool:CanDoToughWork())
+		then
+		--
 		local t = GetTime()
 		if inst._recoils == nil then
 			inst._recoils = {}
@@ -136,6 +140,8 @@ local function basecrystal_fn(anim_prefix, physics_size)
     inst.AnimState:SetBuild("lunar_rift_crystals")
     inst.AnimState:PlayAnimation(anim_prefix, true)
     inst.AnimState:SetLightOverride(0.1)
+
+    inst.pickupsound = "gem"
 
     inst:AddTag("birdblocker")
     inst:AddTag("boulder")
@@ -205,7 +211,7 @@ local function on_big_crystal_worked(inst, worker, work_left)
 
         inst:Remove()
     else
-		local anim = work_left < HALF_WORK and "half" or "full"
+		local anim = work_left <= HALF_WORK and "half" or "full"
 		if not inst.AnimState:IsCurrentAnimation(anim) then
 			inst.AnimState:PlayAnimation(anim, true)
 		end

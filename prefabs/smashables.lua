@@ -89,6 +89,7 @@ local function MakeRelic(inst)
 
 	if inst.chair and inst.components.sittable == nil then
 		inst:AddComponent("sittable")
+		inst:AddTag("structure")
 	end
 	if inst.chair_shadeling_spawner then
 		inst.OnEntityWake = Chair_OnEntityWake
@@ -132,6 +133,7 @@ local function MakeRubble(inst)
 
 	if inst.components.sittable ~= nil then
 		inst:RemoveComponent("sittable")
+		inst:RemoveTag("structure")
 	end
 	if inst.chair_shadeling_spawner then
 		inst.OnEntityWake = nil
@@ -232,6 +234,8 @@ local function makefn(name, asset, animated, smashsound, rubble, chair)
         inst.components.health.canheal = false
         inst.components.health:SetMaxHealth(GetRandomWithVariance(90, 20))
         inst.components.health.ondelta = OnHealthDelta
+
+        inst.scrapbook_maxhealth = 90
 
         inst:ListenForEvent("death", OnDeath)
 

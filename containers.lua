@@ -1,5 +1,5 @@
 local cooking = require("cooking")
-local PopupDialogScreen = require "screens/redux/popupdialog"
+local RiftConfirmScreen = require("screens/redux/riftconfirmscreen")
 
 local params = {}
 local containers = { MAXITEMSLOTS = 0 }
@@ -373,7 +373,13 @@ params.construction_container =
         {
             text = STRINGS.ACTIONS.APPLYCONSTRUCTION.GENERIC,
             position = Vector3(0, -94, 0),
-        }
+		},
+		--V2C: -override the default widget sound, which is heard only by the client
+		--     -most containers disable the client sfx via skipopensnd/skipclosesnd,
+		--      and play it in world space through the prefab instead.
+		opensound = "dontstarve/wilson/chest_open",
+		closesound = "dontstarve/wilson/chest_close",
+		--
     },
     usespecificslotsforitems = true,
     type = "cooker",
@@ -403,10 +409,12 @@ function params.construction_container.widget.buttoninfo.validfn(inst)
     return inst.replica.container ~= nil and not inst.replica.container:IsEmpty()
 end
 
+params.construction_repair_container = deepcopy(params.construction_container)
+params.construction_repair_container.widget.buttoninfo.text = STRINGS.ACTIONS.APPLYCONSTRUCTION.REPAIR
+
 --------------------------------------------------------------------------
 --[[ enable_shadow_rift_construction_container ]]
 --------------------------------------------------------------------------
-
 
 params.enable_shadow_rift_construction_container = deepcopy(params.construction_container)
 
@@ -448,35 +456,40 @@ local function EnableRiftsPopUpGoBack()
     TheFrontEnd:PopScreen()
 end
 
+local function EnableRiftsDoAct(inst, doer)
+	if inst.components.container ~= nil then
+		BufferedAction(doer, inst, ACTIONS.APPLYCONSTRUCTION):Do()
+	elseif inst.replica.container ~= nil and not inst.replica.container:IsBusy() then
+		SendRPCToServer(RPC.DoWidgetButtonAction, ACTIONS.APPLYCONSTRUCTION.code, inst, ACTIONS.APPLYCONSTRUCTION.mod_name)
+	end
+end
+
 function params.enable_shadow_rift_construction_container.widget.buttoninfo.fn(inst, doer)
-    local function DoAct()
-        if inst.components.container ~= nil then
-            BufferedAction(doer, inst, ACTIONS.APPLYCONSTRUCTION):Do()
-        elseif inst.replica.container ~= nil and not inst.replica.container:IsBusy() then
-            SendRPCToServer(RPC.DoWidgetButtonAction, ACTIONS.APPLYCONSTRUCTION.code, inst, ACTIONS.APPLYCONSTRUCTION.mod_name)
-        end
-    end
+	if not params.enable_shadow_rift_construction_container.widget.overrideactionfn(inst, doer) then
+		-- No UI no dialogue.
+		EnableRiftsDoAct(inst, doer)
+	end
+end
 
-    if TheFrontEnd ~= nil and doer and doer == ThePlayer and IsConstructionSiteComplete(inst, doer) then
-        -- We have UI do dialogue.
-        local function EnableRiftsPopUpConfirm()
-            DoAct()
-            TheFrontEnd:PopScreen()
-        end
+function params.enable_shadow_rift_construction_container.widget.overrideactionfn(inst, doer)
+	if doer ~= nil and doer.HUD ~= nil and IsConstructionSiteComplete(inst, doer) then
+		-- We have UI do dialogue.
+		local function EnableRiftsPopUpConfirm()
+			EnableRiftsDoAct(inst, doer)
+			TheFrontEnd:PopScreen()
+		end
 
-        local str = inst.POPUP_STRINGS
+		local str = inst.POPUP_STRINGS
+		local confirmation = RiftConfirmScreen(str.TITLE, str.BODY,
+		{
+			{ text = str.OK,     cb = EnableRiftsPopUpConfirm },
+			{ text = str.CANCEL, cb = EnableRiftsPopUpGoBack  },
+		})
 
-        local confirmation = PopupDialogScreen(str.TITLE, str.BODY,
-        {
-            { text = str.OK,     cb = EnableRiftsPopUpConfirm },
-            { text = str.CANCEL, cb = EnableRiftsPopUpGoBack  },
-        },nil,"big","dark_wide")
-
-        TheFrontEnd:PushScreen(confirmation)
-    else
-        -- No UI no dialogue.
-        DoAct()
-    end
+		TheFrontEnd:PushScreen(confirmation)
+		return true
+	end
+	return false
 end
 
 --lunar is same as shadow, just different strings specified in prefab
