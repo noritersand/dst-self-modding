@@ -41,8 +41,7 @@ local function fn()
     inst:AddComponent("tradable")
 
     inst:AddComponent("healer")
-    -- inst.components.healer:SetHealthAmount(TUNING.HEALING_MEDSMALL)
-    inst.components.healer:SetHealthAmount(TUNING.HEALING_LARGE)
+    inst.components.healer:SetHealthAmount(TUNING.HEALING_MEDSMALL)
 
     return inst
 end

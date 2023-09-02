@@ -116,10 +116,10 @@ local function common(anim, cookable, oceanfishing_lure)
     MakeSmallPropagator(inst)
     MakeHauntableLaunchAndPerish(inst)
 
-    -- inst:AddComponent("perishable")
-    -- inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
-    -- inst.components.perishable:StartPerishing()
-    -- inst.components.perishable.onperishreplacement = "spoiled_food"
+    inst:AddComponent("perishable")
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
+    inst.components.perishable:StartPerishing()
+    inst.components.perishable.onperishreplacement = "spoiled_food"
 
     inst.scrapbook_removedeps = scrapbook_removedeps
 

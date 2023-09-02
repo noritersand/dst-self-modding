@@ -1205,6 +1205,8 @@ TheInventory:AddRestrictedBuildFromLua( "kitten_winter", "kitten_winter", false 
 TheInventory:AddRestrictedBuildFromLua( "kitten_winter", "kitten_winter_builder", false )
 TheInventory:AddRestrictedBuildFromLua( "krampus_sack_basket", "krampus_sack_basket", false )
 TheInventory:AddRestrictedBuildFromLua( "krampus_sack_voidbag", "krampus_sack_voidbag", false )
+TheInventory:AddRestrictedBuildFromLua( "lamb_cotl", "lamb_cotl", false )
+TheInventory:AddRestrictedBuildFromLua( "lamb_cotl", "lamb_cotl_builder", false )
 TheInventory:AddRestrictedBuildFromLua( "lamb_winter", "lamb_winter", false )
 TheInventory:AddRestrictedBuildFromLua( "lamb_winter", "lamb_winter_builder", false )
 TheInventory:AddRestrictedBuildFromLua( "lantern_crystal", "lantern_crystal", false )
@@ -1565,6 +1567,7 @@ TheInventory:AddRestrictedBuildFromLua( "mysterybox_trickortreat_alt", "mysteryb
 TheInventory:AddRestrictedBuildFromLua( "mysterybox_ugly_3", "mysterybox_ugly_3", false )
 TheInventory:AddRestrictedBuildFromLua( "mysterybox_victorian_4", "mysterybox_victorian_4", false )
 TheInventory:AddRestrictedBuildFromLua( "mysterybox_wormholes", "mysterybox_wormholes", false )
+TheInventory:AddRestrictedBuildFromLua( "nightsword_cotl", "nightsword_cotl", false )
 TheInventory:AddRestrictedBuildFromLua( "nightsword_curve", "nightsword_curve", false )
 TheInventory:AddRestrictedBuildFromLua( "nightsword_lightsbane", "nightsword_lightsbane", false )
 TheInventory:AddRestrictedBuildFromLua( "nightsword_sharp", "nightsword_sharp", false )
@@ -2042,6 +2045,7 @@ TheInventory:AddRestrictedBuildFromLua( "playerportrait_bg_pighouse", "playerpor
 TheInventory:AddRestrictedBuildFromLua( "playerportrait_bg_plates", "playerportrait_bg_plates", true )
 TheInventory:AddRestrictedBuildFromLua( "playerportrait_bg_portal", "playerportrait_bg_portal", true )
 TheInventory:AddRestrictedBuildFromLua( "playerportrait_bg_pothanger", "playerportrait_bg_pothanger", true )
+TheInventory:AddRestrictedBuildFromLua( "playerportrait_bg_pottedferncotl", "playerportrait_bg_pottedferncotl", true )
 TheInventory:AddRestrictedBuildFromLua( "playerportrait_bg_pumpkinlantern", "playerportrait_bg_pumpkinlantern", true )
 TheInventory:AddRestrictedBuildFromLua( "playerportrait_bg_quagmiretournamentbronze", "playerportrait_bg_quagmiretournamentbronze", true )
 TheInventory:AddRestrictedBuildFromLua( "playerportrait_bg_quagmiretournamentgold", "playerportrait_bg_quagmiretournamentgold", true )
@@ -2091,6 +2095,9 @@ TheInventory:AddRestrictedBuildFromLua( "playerportrait_bg_yule4", "playerportra
 TheInventory:AddRestrictedBuildFromLua( "playerportrait_bg_yule5", "playerportrait_bg_yule5", true )
 TheInventory:AddRestrictedBuildFromLua( "playerportrait_bg_yule6", "playerportrait_bg_yule6", true )
 TheInventory:AddRestrictedBuildFromLua( "playerportrait_bg_yule7", "playerportrait_bg_yule7", true )
+TheInventory:AddRestrictedBuildFromLua( "pottedfern_cotl", "pottedfern_cotl", false )
+TheInventory:AddRestrictedBuildFromLua( "pottedfern_cotl2", "pottedfern_cotl2", false )
+TheInventory:AddRestrictedBuildFromLua( "pottedfern_cotl3", "pottedfern_cotl3", false )
 TheInventory:AddRestrictedBuildFromLua( "premiumwateringcan_koalefant", "premiumwateringcan_koalefant", false )
 TheInventory:AddRestrictedBuildFromLua( "profileflair_abigail_flower", "profileflair_abigail_flower", true )
 TheInventory:AddRestrictedBuildFromLua( "profileflair_anchor_nautical", "profileflair_anchor_nautical", true )
@@ -2205,6 +2212,7 @@ TheInventory:AddRestrictedBuildFromLua( "profileflair_pigking", "profileflair_pi
 TheInventory:AddRestrictedBuildFromLua( "profileflair_pigking_yotp", "profileflair_pigking_yotp", true )
 TheInventory:AddRestrictedBuildFromLua( "profileflair_pigtoken_yotp", "profileflair_pigtoken_yotp", true )
 TheInventory:AddRestrictedBuildFromLua( "profileflair_potion_sanity", "profileflair_potion_sanity", true )
+TheInventory:AddRestrictedBuildFromLua( "profileflair_pottedfern_cotl", "profileflair_pottedfern_cotl", true )
 TheInventory:AddRestrictedBuildFromLua( "profileflair_pumpkinlantern", "profileflair_pumpkinlantern", true )
 TheInventory:AddRestrictedBuildFromLua( "profileflair_puppington", "profileflair_puppington", true )
 TheInventory:AddRestrictedBuildFromLua( "profileflair_quagmiretournament_bronze", "profileflair_quagmiretournament_bronze", true )
@@ -2465,6 +2473,8 @@ TheInventory:AddRestrictedBuildFromLua( "treasurechest_ancient", "treasurechest_
 TheInventory:AddRestrictedBuildFromLua( "treasurechest_cake", "treasurechest_cake", false )
 TheInventory:AddRestrictedBuildFromLua( "treasurechest_carpetbag", "treasurechest_carpetbag", false )
 TheInventory:AddRestrictedBuildFromLua( "treasurechest_corruption", "treasurechest_corruption", false )
+TheInventory:AddRestrictedBuildFromLua( "treasurechest_cotl_basic", "treasurechest_cotl_basic", false )
+TheInventory:AddRestrictedBuildFromLua( "treasurechest_cotl_fancy", "treasurechest_cotl_fancy", false )
 TheInventory:AddRestrictedBuildFromLua( "treasurechest_crimson", "treasurechest_crimson", false )
 TheInventory:AddRestrictedBuildFromLua( "treasurechest_cupid", "treasurechest_cupid", false )
 TheInventory:AddRestrictedBuildFromLua( "treasurechest_cupid", "treasurechest_cupidalt", false )
@@ -3385,6 +3395,7 @@ TheInventory:AddSkinLinkInput( "insanityrock_fantasy", "sanityrock_fantasy" )
 TheInventory:AddSkinLinkInput( "insanityrock_gothic", "sanityrock_gothic" )
 TheInventory:AddSkinLinkInput( "kitten_black_builder", "kitten_black" )
 TheInventory:AddSkinLinkInput( "kitten_winter_builder", "kitten_winter" )
+TheInventory:AddSkinLinkInput( "lamb_cotl_builder", "lamb_cotl" )
 TheInventory:AddSkinLinkInput( "lamb_winter_builder", "lamb_winter" )
 TheInventory:AddSkinLinkInput( "mast_crabking_alt_item", "mast_crabking_alt" )
 TheInventory:AddSkinLinkInput( "mast_crabking_item", "mast_crabking" )
@@ -3420,6 +3431,8 @@ TheInventory:AddSkinLinkInput( "perdling_pollyrogers_builder", "perdling_pollyro
 TheInventory:AddSkinLinkInput( "perdling_puffin_builder", "perdling_puffin" )
 TheInventory:AddSkinLinkInput( "perdling_rooster_builder", "perdling_rooster" )
 TheInventory:AddSkinLinkInput( "perdling_winter_builder", "perdling_winter" )
+TheInventory:AddSkinLinkInput( "pottedfern_cotl2", "pottedfern_cotl" )
+TheInventory:AddSkinLinkInput( "pottedfern_cotl3", "pottedfern_cotl" )
 TheInventory:AddSkinLinkInput( "puppy_chow_builder", "puppy_chow" )
 TheInventory:AddSkinLinkInput( "puppy_tzu_builder", "puppy_tzu" )
 TheInventory:AddSkinLinkInput( "puppy_winter_builder", "puppy_winter" )
@@ -3703,8 +3716,8 @@ TheInventory:AddGenericKVKey( "fuelweaver_killed" )
 TheInventory:AddGenericKVKey( "wonkey_played" )
 
 if TheInventory.AddScrapbook0Key == nil then
-    TheInventory:ValidateWithSignature( "5427334c4bb7573388ddd91ac2587295dd3427b1f1ead60035e2a91019700c57d3c81e954a096c114e913bd850925f4cb086b63455b43f2e358f5a7fecb36633f9c8882580c7acb06709dc68693f940f7629e8c7352fdff9194eda094e522668e3dfb379699581d95147b11859d6cde3c428fb52ab57a07ecd0bce1f23194954e4251127fed509499d85aa8e2f56d31c08d6baf5f0aca943501a970741ae1fe28346727461c651c757aceb671e6d6a0f42ed4868c75eef645d678de8c6f358cf45591a885be8db1c1996df309246bc80223de810a2fcb96e4c0b4909a5b6fef374e6e5b7a1e5a6970dc751bcec8474342700a6d27d34ad8db4b5b3f11876fba7d274a45fa03196be477cac60ccd990ba992764370cf78983c8a18ca4d0f213dc1b9763d21380fa652e58575edb957f257e0ed3fafdfa92ed288940fe3d5ee123960017aede396426fac2759ca6544d60f411509eb960da1519185bf80d96906003207c2e372c5d4edecd4df21008004b7c584fbc6f8fa125b4e18b3ad55f161c388ed11607d66b697e067ee129bd8a0024ffcb424841ee959b5c2a88e4dcd266248663414d8e959975305ff2d10b0411741f82de2c22317e3344063a660c1201ed2c387b9e2b75f152861a3e2f35638b9ec6356ec5b7c89a663fd9c90e9b56602c248af3685095200627dfb407c0a53cbccc24275e84629934e51e25f89b862b" )
-else -- Temporary protection guard for platforms missing the engine change.
+    TheInventory:ValidateWithSignature( "4d75050028ca0b61f77fde39ba56df4437328904c50cc2be461a7b103a7a5aae70c826c9c1c82b3cd077ab6553f1349ad6dc7e0388073a63384c49d8757a9808a9d58889b172ecca3eb0feb170f07c140a70b99f43fd9d40347d7331701e4b798589bf8cb66bbc7cc47a360f3748959ab7fe8a49af76fc3a95bba1b813bc59cdddffeb3a0857ab30604ab5d5dde5218c0301025e0c59dfcd15382f506be3e163294f2505b0057bc430c058d288c95f287edd09347a323c036387ff94ae017fd3e006c5ed42cbcd88bf715f68944a04ab901c329595dceec465fcff2d5e922969aca8095a2ba7080c3b0589fd1597c665e0cd52430ff47459ba74f4d5e6786df9a5f16023b6089a15ce2a6ae43ebe2c2d4b3868ce78fdf15fa2b0db1d37de57d6bd2355eca49f45bc7830cfde65e67a163da3e91465227aced8c11013ded200145eb766605c8772c85e9dc2ef2537053936a3f9fa1364b03f1326d04860df12d9c3f1d185927823f1030d800ba3051b1826c61a2dcafdeda1eb6fd69bc66cc20ae6c36efd1f1a5f4eb03a68cfc3c1286c027bcbb5e5983b3f4d582f40e94fa0dd03cee1fd373954fac6fceed03095a9fbeb89b1488302581b30a26f76fafa49f005110b381adac493dd7b6b8756c5bcb4cc5d14119d89e577f0ee2cb62b4015da8a02116b1fb325b8c4b7bb993d62df254db786b3f9fff6f6daaf52bf0b3ad3ce" )
+else -- Temporary protection guard for platforms missing the engine change 1.
 
 TheInventory:AddScrapbook5Key( "679F8765" ) -- abigail
 TheInventory:AddScrapbook5Key( "481FFFD5" ) -- abigail_flower
@@ -4006,6 +4019,8 @@ TheInventory:AddScrapbook11Key( "DCA56ACB" ) -- costume_king_body
 TheInventory:AddScrapbook3Key( "B0FAD403" ) -- costume_mirror_body
 TheInventory:AddScrapbook6Key( "861A4296" ) -- costume_queen_body
 TheInventory:AddScrapbook4Key( "50513384" ) -- costume_tree_body
+TheInventory:AddScrapbook12Key( "AC23A04C" ) -- cotl_tabernacle_level3
+TheInventory:AddScrapbook12Key( "75D59BDC" ) -- cotl_trinket
 TheInventory:AddScrapbook7Key( "7CBEE0C7" ) -- crabking
 TheInventory:AddScrapbook5Key( "DCD8F65" ) -- crawlinghorror
 TheInventory:AddScrapbook6Key( "49AFD846" ) -- critterlab
@@ -5034,6 +5049,8 @@ TheInventory:AddScrapbook7Key( "1DAA5AB7" ) -- turf_carpetfloor
 TheInventory:AddScrapbook11Key( "A7A3533B" ) -- turf_carpetfloor2
 TheInventory:AddScrapbook7Key( "C6A141D7" ) -- turf_cave
 TheInventory:AddScrapbook1Key( "E8F381A1" ) -- turf_checkerfloor
+TheInventory:AddScrapbook0Key( "D14473F0" ) -- turf_cotl_brick
+TheInventory:AddScrapbook1Key( "C4784131" ) -- turf_cotl_gold
 TheInventory:AddScrapbook11Key( "9C885B2B" ) -- turf_deciduous
 TheInventory:AddScrapbook6Key( "A5F511E6" ) -- turf_desertdirt
 TheInventory:AddScrapbook6Key( "ACC09476" ) -- turf_dragonfly
@@ -7143,10 +7160,72 @@ TheInventory:AddScrapbook12Key( "4374C56C" ) -- yellowstaff
 --TheInventory:AddItemIDPairing(1993, "wolfgang_ancient")
 --TheInventory:AddItemIDPairing(1994, "woodie_ancient")
 --TheInventory:AddItemIDPairing(1995, "wormwood_ancient")
+--TheInventory:AddItemIDPairing(1996, "lamb_cotl")
+--TheInventory:AddItemIDPairing(1997, "nightsword_cotl")
+--TheInventory:AddItemIDPairing(1998, "treasurechest_cotl_basic")
+--TheInventory:AddItemIDPairing(1999, "treasurechest_cotl_fancy")
+--TheInventory:AddItemIDPairing(2000, "playerportrait_bg_pottedferncotl")
+--TheInventory:AddItemIDPairing(2001, "pottedfern_cotl")
+--TheInventory:AddItemIDPairing(2002, "profileflair_pottedfern_cotl")
 
-TheInventory:ValidateWithSignature( "5c66efa1011ff4594e0de35843c7bfcb8a2f67092959a6db0f96963e5af7e3cf7fffdc6538abdd4fad899f5ee48eeb5b030da3fa26d442c8ea5650839c7fac0091fb036cf298a353d878ce207bfab29582838c1665c098504dcea8c25653b8e464f10fb2eb7b6f68ccc4423e32a67994acf2d98a2c08b6d05f2aafc8c9d3d04d3f8171fd0e6756a1196d4baca82d99bef0664118d6643d0a404cc3bb2a6351c355482c8f6e300e1eb07c70dd16b5e8a0fe760d1b4542d37b23ad572c68ab8cbe507b0434bbb5022e775512207c1efb126e7730587ce96239f5b8a8006277ae5344b629b79a51d2ee052232ee7e252e6a0c9a19e07e0ed5cec9e031e580cb0302c8859d84e54420e0c70ec7c315525a53ed949296c122e3cc1dde415ad3f57fc3fe24a97195967b1aeee89be05f4f2e8d2aa243e9c3c9ea96cb930ece8cb8057cbe1617289ff0d014986fe8ca41654389578f1ccc824f1a6ed08a762b44868441cee27bc485f1803a1584552bba7662c65a09cf3224cffc9d3672bd6a8126072478801a16d0ee7cf4d82f0ab9dfd6c1b2625eb8870db1ac146b901fb6970bbfa8a1a1eae955dceae4976b8b5c82e309bddd411c8b4e23e7d01f35e2d4b30af3cc51af5d31fad5c21c9b16126e1f62d13b35e12061f85c455bd7d6df6fdf9c6ff5ccdb54f6b4a382d5e6949ec3041b1174f7469d4a1bf551816f169f355ce30f91" )
+if TheInventory.AddFreeItemForEveryone == nil then
+    TheInventory:ValidateWithSignature( "41c50a7d589ca9891c75e113526fb0296faeef4b2d62d0e86ade2e389105b5a8a51223b66ab00dcb9a167214cc58c0cb7fa754c94bda4a6454e5ecbe03a5aa447dfd124508058ab2830649dd1858cab79264bd96db201fae069237abb49d553accfffc8fa841d5564d94b89687d92f6cfbbb48cd34c75152634b0d484fead26640c765e46608e3099cfa16ed72bfe104cad9779a58593705c31dcf06772d1e4af1bf9ca4b9c5e66eafa3b9bfdd1fc3909ca834d46e34e8cc22ed629e00c5874666cffe05bb1c7b47a373d52724363673be3e9f22ded409349eb8f91545ac30fbb4b3c326e3de006cad3e88579199a034bbcaa9a4b259757654f4f9db7704efee692eb6ca89b8deece3758bff12f8df5cb7bfc83634dff46c25e44568a761a40898601d94c9e03582a608726cf10b9510a3827146c239fb005d6612661a1d6925c3ef6f934e4261c3b8222ae575a763cd94ba4462577c95b3edf9607d89a9007fde2f204b12495c435ef7cc70d42b7bfb81985da0ac82e9b0da7d38ec05d0c597e836bbdf71672c4572d8f3a20a4230d9eb74d69caca73e4ce8fa679ccf8a799d53f5226779f10050bb2bb44de95b5975eb9eaf99a69330d906e5e09c7b6e8a93dbd7af05fc29caca27e2a00f977b11da2c5f56b885c168c28a0b04232853ba08ed03191060551aec5a96ccfef9590a0c7b0cc45c3ad61dfdd3a4a6a889e92894" )
+else -- Temporary protection guard for platforms missing the engine change 2.
 
-end -- Temporary protection guard for platforms missing the engine change.
+-- These are free items for everyone and are not networked.
+TheInventory:AddFreeItemForEveryone("beefalo_horn_war") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_head_war") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_feet_war") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_body_war") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_tail_war") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_horn_doll") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_head_doll") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_feet_doll") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_body_doll") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_tail_doll") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_horn_festive") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_head_festive") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_feet_festive") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_body_festive") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_tail_festive") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_horn_nature") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_head_nature") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_feet_nature") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_body_nature") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_tail_nature") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_horn_robot") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_head_robot") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_feet_robot") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_body_robot") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_tail_robot") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_horn_formal") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_head_formal") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_feet_formal") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_body_formal") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_tail_formal") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_horn_ice") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_head_ice") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_feet_ice") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_body_ice") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_tail_ice") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_horn_victorian") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_head_victorian") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_feet_victorian") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_body_victorian") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_tail_victorian") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_horn_beast") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_head_beast") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_feet_beast") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_body_beast") -- 112
+TheInventory:AddFreeItemForEveryone("beefalo_tail_beast") -- 112
+TheInventory:AddFreeItemForEveryone("loading_dst10_signed") -- 144
+TheInventory:AddFreeItemForEveryone("loading_dst10_unsigned") -- 144
+
+TheInventory:ValidateWithSignature( "77868ac6f532de64b508ec00046eabef01cde6af063e15a6218d6e1915a7dbaa6b4a5d930c2848dd78ca0e1863723d599d83823bee06f40495b976e387084f54c19fffc80bdd44b97a298a3ba9d22d09d331c6296f135387edada828c4603870ff771cb3ce485f4e5b6d036bfd0d987f85f0ff2e6422f8dcf5f53e3182d98c1300f771ec41c5953c4681d2d09bb71363e7bb1f1c03a70b3df41c7497ba1c0e9cf118aa03128776dc28cb3e20f005abac51c0d1e2ae18d52501941f5ba880ee4118c73e894f97f306aa8ec8e47812e09a9065fd2709b9081e94ba74eccfb21f158f00a89eb2a39346e9bb9bf5ce4adc68335c41565df45755ab05863d31bf4be1316ce651ebf060b1ff831c3ed861a19f1b2b79e7afe4e87952245742a20f0ee967edd162aab58f033d5d4490776b3913e34a7db9c67fb46a4872757efba48c98c8c131f746976843621924e528ae58eb7647fb5ceb1c57aaf644f8ccdbf0d48147d14e1edcb21aff8efac12e7882356396334d8482824da48ccb4e3715b8a9724f61d18bb5f46186c1527cbc4b75a7b5acf52467ef4487d9c5950e9d98e7722bcb8b6eee8f0c4ee466c040c5013a2e95ae00f1b5ba37bd353fba5e321011e48f23655450deb1e5b56ecd4c1da1c7b6dc80a758dbaf9845b9852e142478f92c931fa53dd1abfd6fcf18ad7d8e5115d6b2d513aad9bdd2e28b2b45a02e2c35f7d3" )
+
+end -- Temporary protection guard for platforms missing the engine change 2.
+
+end -- Temporary protection guard for platforms missing the engine change 1.
 
 TheSim:AddTextureToStreamingGroup( 0 ,"anim/dynamic/wolfgang_mighty_ancient.zip:wolfgang_mighty_ancient--atlas-0.tex" )
 TheSim:AddTextureToStreamingGroup( 0 ,"anim/dynamic/wolfgang_ancient.zip:wolfgang_ancient--atlas-0.tex" )

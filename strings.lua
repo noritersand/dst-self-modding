@@ -3505,6 +3505,14 @@ STRINGS =
 
         BIGSHADOWTENTACLE = "Guardian Shadow Tentacle",
 
+		-- Cult of the Lamb
+		COTL_TRINKET = "Red Crown",
+        TURF_COTL_BRICK = "Brick Flooring",
+        TURF_COTL_GOLD = "Gold Flooring",
+		COTL_TABERNACLE_LEVEL1 = "Humble Lamb Idol",
+		COTL_TABERNACLE_LEVEL2 = "Improved Lamb Idol",
+		COTL_TABERNACLE_LEVEL3 = "Immaculate Lamb Idol",
+
         -- WOLFGANG
         MIGHTY_GYM = "Mighty Gym",
         DUMBBELL = "Dumbbell",
@@ -4536,6 +4544,13 @@ STRINGS =
 
 		-- Terraria
         CRITTER_EYEOFTERROR_BUILDER = "Summon a friendly ocular companion.",
+
+		-- Cult of the Lamb
+		TURF_COTL_BRICK = "Individual bricks, brought together to serve a greater purpose.",
+        TURF_COTL_GOLD = "Set the groundwork for a new golden age.",
+		COTL_TABERNACLE_LEVEL1 = "A shoddy carving in the form of a lamb.",
+		COTL_TABERNACLE_LEVEL2 = "A refined statue to celebrate the lamb.",
+		COTL_TABERNACLE_LEVEL3 = "A dazzling monument to the lamb's glory.",
 
         -- WOLFGANG
         MIGHTY_GYM = "Bring on the brawn!",
@@ -8181,6 +8196,7 @@ STRINGS.UI =
         TEXTURESTREAMING = "Texture Streaming:",
         THREADEDRENDER = "Threaded Render:",
 		SCREEN_FLASH_INTENSITY = "Screen Flashes:",
+		SCREEN_FLASH_INTENSITY_SWITCH = "Photosensitivity Mode:",
         DYNAMIC_TREE_SHADOWS = "Canopy Shadows:",
 		INVERTCAMERAROTATION = "Camera Rotation",
         RESTART_TEXTURE_STREAMING_TITLE = "Restart Required",
@@ -8237,6 +8253,7 @@ STRINGS.UI =
             -- Settings
             INPUT = "Controller or Keyboard? Play Don't Starve Together your way.",
             VIBRATION = "Make your controller rumble at key gameplay moments.",
+			VIBRATION_WIRELESS = "Make your wireless controller rumble at key gameplay moments.",
             FX = "Change how loud things are in the world.",
             MUSIC = "Tone up or down the musical fanfare in your adventures.",
             AMBIENT = "The environment makes noise too, luckily you can control how loudly it does.",
@@ -8276,6 +8293,7 @@ STRINGS.UI =
             DISTORTION = "Allows you to turn off screen distortions in the game, especially notable during moments of insanity.",
             BLOOM = "Increases the visual intensity of lights.",
             SCREEN_FLASH_INTENSITY = "Control the intensity of screen flashes during explosions and lightning strikes.",
+			SCREEN_FLASH_INTENSITY_SWITCH = "Control the intensity of flashing effects during explosions and lightning strikes.",
             DYNAMIC_TREE_SHADOWS = "Renders the ground shadow while under a canopy.",
 			DISPLAYAREA = "Maximize the screen size on your display.",
 			INVERTCAMERAROTATION = "Flips the camera rotation direction.",
@@ -11890,6 +11908,7 @@ STRINGS.UI =
             "Inv 13",
             "Inv 14",
             "Inv 15",
+            "Start Emoticon",
         },
 
         DEVICE_TITLE = "Controls",
