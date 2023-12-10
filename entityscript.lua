@@ -719,6 +719,24 @@ function EntityScript:GetIsWet()
 		or (TheWorld.state.iswet and not self:HasTag("rainimmunity"))
 		or (self:HasTag("swimming") and not self:HasTag("likewateroffducksback"))
 end
+--Can be used on clients
+function EntityScript:IsAcidSizzling()
+    if self:HasTag("acidrainimmune") then
+        return false
+    end
+
+    local replica = self.replica.inventoryitem
+    if replica ~= nil then
+        return replica:IsAcidSizzling()
+    end
+
+    local player_classified = self.player_classified
+    if player_classified ~= nil then
+        return player_classified.isacidsizzling:value()
+    end
+
+    return false
+end
 
 function EntityScript:GetSkinBuild()
     if self.skin_build_name == nil then
@@ -1468,16 +1486,25 @@ function EntityScript:PerformBufferedAction()
 			self:PushEvent("play_theme_music", {theme = action_theme_music})
 		end
 
-        local success, reason = self.bufferedaction:Do()
+		local bufferedaction = self.bufferedaction
+		--@V2C: - cahced in case self.bufferedaction changes
+		--      - ideally, should clear self.bufferedaction here
+		--      - however, legacy code might rely on inst.bufferedaction during Do()
+
+		local success, reason = bufferedaction:Do()
         if success then
-            self.bufferedaction = nil
+			if self.bufferedaction == bufferedaction then
+				self.bufferedaction = nil
+			end
             return true
         end
 
-        self:PushEvent("actionfailed", { action = self.bufferedaction, reason = reason })
+		self:PushEvent("actionfailed", { action = bufferedaction, reason = reason })
 
-        self.bufferedaction:Fail()
-        self.bufferedaction = nil
+		bufferedaction:Fail()
+		if self.bufferedaction == bufferedaction then
+			self.bufferedaction = nil
+		end
     end
 end
 

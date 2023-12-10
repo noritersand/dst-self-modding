@@ -13,6 +13,14 @@ local prefabs =
 	"cotl_tabernacle_level3",
 }
 
+local scrapbook_adddeps =
+{
+    "rocks",
+    "log",
+    "cutstone",
+    "goldnugget",
+}
+
 local data = {
 	{
 		construction_product = "cotl_tabernacle_level2", 
@@ -28,6 +36,8 @@ local data = {
 			ontakefuel = "dontstarve/common/fireAddFuel",
 		},
 		sanity_arua = TUNING.SANITYAURA_TINY,
+        disable_charcoal = true,
+        scrapbook_proxy = "cotl_tabernacle_level3",
 	},
 	{
 		construction_product = "cotl_tabernacle_level3", 
@@ -43,6 +53,8 @@ local data = {
 			ontakefuel = "dontstarve/common/fireAddFuel",
 		},
 		sanity_arua = TUNING.SANITYAURA_SMALL_TINY,
+        disable_charcoal = true,
+        scrapbook_proxy = "cotl_tabernacle_level3",
 	},
 	{
 		construction_product = nil, 
@@ -58,6 +70,8 @@ local data = {
 			ontakefuel = "dontstarve/common/fireAddFuel",
 		},
 		sanity_arua = TUNING.SANITYAURA_SMALL,
+        disable_charcoal = false,
+        scrapbook_proxy = nil,
 	},
 }
 
@@ -88,7 +102,7 @@ local function ontakefuel(inst)
 end
 
 local function updatefuelrate(inst)
-    inst.components.fueled.rate = TheWorld.state.israining and 1 + inst.data.tunings.RAIN_RATE * TheWorld.state.precipitationrate or 1
+    inst.components.fueled.rate = TheWorld.state.israining and inst.components.rainimmunity == nil and 1 + inst.data.tunings.RAIN_RATE * TheWorld.state.precipitationrate or 1
 end
 
 local function onupdatefueled(inst)
@@ -101,6 +115,10 @@ end
 local function onfuelchange(newsection, oldsection, inst, doer)
     if newsection <= 0 then
         inst.components.burnable:Extinguish()
+        if inst.queued_charcoal then
+            inst.components.lootdropper:SpawnLootPrefab("charcoal")
+            inst.queued_charcoal = nil
+        end
 
 		inst:RemoveComponent("sanityaura")
 
@@ -120,6 +138,10 @@ local function onfuelchange(newsection, oldsection, inst, doer)
 
 		inst.AnimState:Show("FIRE")
 		inst.AnimState:Hide("NOFIRE")
+
+        if newsection == inst.components.fueled.sections then
+            inst.queued_charcoal = not inst.disable_charcoal
+        end
     end
 end
 
@@ -148,6 +170,16 @@ end
 local function OnInit(inst)
     if inst.components.burnable ~= nil then
         inst.components.burnable:FixFX()
+    end
+end
+
+local function OnSave(inst, data)
+    data.queued_charcoal = inst.queued_charcoal or nil
+end
+
+local function OnLoad(inst, data)
+    if data ~= nil and data.queued_charcoal then
+        inst.queued_charcoal = true
     end
 end
 
@@ -199,13 +231,22 @@ local function fn(data)
     MakeObstaclePhysics(inst, 1)
     MakeSnowCoveredPristine(inst)
 
+    inst.scrapbook_proxy = data.scrapbook_proxy
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
 
+    inst.scrapbook_anim    = "idle_3"
+    inst.scrapbook_adddeps = scrapbook_adddeps
+
 	inst.data = data
+
+    inst.disable_charcoal = data.disable_charcoal
+    inst.OnSave = OnSave
+    inst.OnLoad = OnLoad
 
 	if data.construction_product then
 		inst._construction_product = data.construction_product

@@ -393,6 +393,36 @@ PREFAB_SKINS = {
 		"critterlab_fantasy",
 		"critterlab_gothic",
 	},
+	decor_centerpiece =
+	{
+		"decor_centerpiece_fantasy",
+		"decor_centerpiece_hallowed",
+		"decor_centerpiece_handmade",
+	},
+	decor_flowervase =
+	{
+		"decor_flowervase_fantasy",
+		"decor_flowervase_hallowed",
+		"decor_flowervase_handmade",
+	},
+	decor_lamp =
+	{
+		"decor_lamp_fantasy",
+		"decor_lamp_hallowed",
+		"decor_lamp_handmade",
+	},
+	decor_pictureframe =
+	{
+		"decor_pictureframe_fantasy",
+		"decor_pictureframe_hallowed",
+		"decor_pictureframe_handmade",
+	},
+	decor_portraitframe =
+	{
+		"decor_portraitframe_fantasy",
+		"decor_portraitframe_hallowed",
+		"decor_portraitframe_handmade",
+	},
 	dock_woodposts =
 	{
 		"dock_woodposts_carved",
@@ -869,6 +899,12 @@ PREFAB_SKINS = {
 		"panflute_an",
 		"panflute_harlequin",
 	},
+	phonograph =
+	{
+		"decor_phonograph_fantasy",
+		"decor_phonograph_hallowed",
+		"decor_phonograph_handmade",
+	},
 	pickaxe =
 	{
 		"pickaxe_feathered",
@@ -924,6 +960,12 @@ PREFAB_SKINS = {
 		"razor_barber",
 		"razor_scissors",
 		"razor_straight",
+	},
+	record =
+	{
+		"record_creepyforest",
+		"record_drstyle",
+		"record_efs",
 	},
 	reflectivevest =
 	{
@@ -1314,6 +1356,7 @@ PREFAB_SKINS = {
 		"warly_carrat_p",
 		"warly_chef",
 		"warly_fisherman",
+		"warly_formal",
 		"warly_ice",
 		"warly_masquerade",
 		"warly_nature",
@@ -1664,6 +1707,30 @@ PREFAB_SKINS = {
 	{
 		"wonkey_none",
 	},
+	wood_chair =
+	{
+		"wood_chair_fantasy",
+		"wood_chair_hallowed",
+		"wood_chair_handmade",
+	},
+	wood_stool =
+	{
+		"chair_stool_fantasy",
+		"chair_stool_hallowed",
+		"chair_stool_handmade",
+	},
+	wood_table_round =
+	{
+		"round_table_fantasy",
+		"round_table_hallowed",
+		"round_table_handmade",
+	},
+	wood_table_square =
+	{
+		"wood_table_fantasy",
+		"wood_table_hallowed",
+		"wood_table_handmade",
+	},
 	woodie =
 	{
 		"woodie_ancient",
@@ -1705,6 +1772,7 @@ PREFAB_SKINS = {
 	{
 		"wormwood_ancient",
 		"wormwood_cactus",
+		"wormwood_formal",
 		"wormwood_ice",
 		"wormwood_lunar",
 		"wormwood_mushroom",
@@ -1722,6 +1790,7 @@ PREFAB_SKINS = {
 	wortox =
 	{
 		"wortox_dragon",
+		"wortox_formal",
 		"wortox_ice",
 		"wortox_masquerade",
 		"wortox_minotaur",
@@ -1782,6 +1851,7 @@ PREFAB_SKINS = {
 	},
 	yellowamulet =
 	{
+		"amulet_yellow_an",
 		"amulet_yellow_ornate",
 	},
 	yellowstaff =

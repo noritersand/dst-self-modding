@@ -20,8 +20,6 @@ local function fn()
 
     MakeInventoryFloatable(inst)
 
-    inst.scrapbook_specialinfo = "SPIDERGLAND"
-
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -41,8 +39,7 @@ local function fn()
     inst:AddComponent("tradable")
 
     inst:AddComponent("healer")
-    -- inst.components.healer:SetHealthAmount(TUNING.HEALING_MEDSMALL)
-    inst.components.healer:SetHealthAmount(TUNING.HEALING_LARGE)
+    inst.components.healer:SetHealthAmount(TUNING.HEALING_MEDSMALL)
 
     return inst
 end

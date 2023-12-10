@@ -57,7 +57,10 @@ local function NoHoles(pt)
 end
 
 function LunarPlant_Tentacle_Weapon:OnAttack(owner, attack_data)
-    if self.should_do_tentacles_fn and not self.should_do_tentacles_fn(self.inst, owner, attack_data) then
+	if attack_data == nil or attack_data.weapon ~= self.inst then
+		--e.g. could be attack events from projectiles fired before we equipped this weapon
+		return
+	elseif self.should_do_tentacles_fn and not self.should_do_tentacles_fn(self.inst, owner, attack_data) then
         return
     end
 
@@ -70,6 +73,7 @@ function LunarPlant_Tentacle_Weapon:OnAttack(owner, attack_data)
         if offset then
             local tentacle = SpawnPrefab(self.tentacle_prefab)
             if tentacle then
+				tentacle.owner = owner
                 tentacle.Transform:SetPosition(pt.x + offset.x, 0, pt.z + offset.z)
                 tentacle.components.combat:SetTarget(target)
             end

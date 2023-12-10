@@ -28,9 +28,9 @@ function Tune(overrides)
     local dusk_time = seg_time * dusk_segs
     local night_time = seg_time * night_segs
 
-    local multiplayer_attack_modifier = 10--0.6--0.75
-    local multiplayer_goldentool_modifier = 2--0.5--0.75
-    local multiplayer_armor_durability_modifier = 1.5
+    local multiplayer_attack_modifier = 1--0.6--0.75
+    local multiplayer_goldentool_modifier = 1--0.5--0.75
+    local multiplayer_armor_durability_modifier = 0.7
     local multiplayer_armor_absorption_modifier = 1--0.75
     local multiplayer_wildlife_respawn_modifier = 1--2
 
@@ -48,10 +48,6 @@ function Tune(overrides)
 
     local OCEAN_NOISE_BASE_SCALE = 10
     local OCEAN_SPEED_BASE_SCALE = 0.01
-
-    local MY_PERISHTIME_MODIFIER = 4
-    local MY_LIGHTTIME_MODIFIER = 3
-    local MY_FULE_MODIFIER = 3
 
     TUNING =
     {
@@ -936,6 +932,10 @@ function Tune(overrides)
         HUNT_COOLDOWNDEVIATION = total_day_time*0.3,
         HUNT_ALTERNATE_BEAST_CHANCE_MIN = 0.05,
         HUNT_ALTERNATE_BEAST_CHANCE_MAX = 0.33,
+        HUNT_SCORE_TIME_PER_NODE = 8,
+        HUNT_SCORE_TIME_PER_NODE_MAX = 10, -- Keep below 1.25 * SEG_TIME
+        HUNT_SCORE_PROP_RATIO = 0.25,
+        HUNT_SCORE_SLEEP_RATIO = 0.4, -- Keep bigger than HUNT_SCORE_PROP_RATIO.
 
         HUNT_RESET_TIME = 5,
         HUNT_SPRING_RESET_TIME = total_day_time * 3,
@@ -1383,6 +1383,10 @@ function Tune(overrides)
 			SHADOW_FORGE = TechTree.Create({
 				SHADOWFORGING = 2,
 			}),
+
+            CARPENTRY_STATION = TechTree.Create({
+                CARPENTRY = 2,
+            }),
 		},
 
         RABBIT_HEALTH = 25 * multiplayer_attack_modifier,
@@ -1409,6 +1413,8 @@ function Tune(overrides)
         HOUND_SPEED = 10,
         HOUND_SWIM_SPEED = 3.5,
         CLAYHOUND_SPEED = 8.5,
+
+		HOUND_FIND_CARCASS_DELAY = 10,
 
         HOUND_FOLLOWER_TARGET_DIST = 10,
         HOUND_FOLLOWER_TARGET_KEEP = 20,
@@ -1583,16 +1589,11 @@ function Tune(overrides)
 
         WET_FUEL_PENALTY = 0.75,
 
-        -- TINY_FUEL = seg_time*.25,
-        -- SMALL_FUEL = seg_time * .5,
-        -- MED_FUEL = seg_time * 1.5,
-        -- MED_LARGE_FUEL = seg_time * 3,
-        -- LARGE_FUEL = seg_time * 6,
-        TINY_FUEL = seg_time*.25 * MY_FULE_MODIFIER,
-        SMALL_FUEL = seg_time * .5 * MY_FULE_MODIFIER,
-        MED_FUEL = seg_time * 1.5 * MY_FULE_MODIFIER,
-        MED_LARGE_FUEL = seg_time * 3 * MY_FULE_MODIFIER,
-        LARGE_FUEL = seg_time * 6 * MY_FULE_MODIFIER,
+        TINY_FUEL = seg_time*.25,
+        SMALL_FUEL = seg_time * .5,
+        MED_FUEL = seg_time * 1.5,
+        MED_LARGE_FUEL = seg_time * 3,
+        LARGE_FUEL = seg_time * 6,
 
         TINY_BURNTIME = seg_time*.1,
         SMALL_BURNTIME = seg_time*.25,
@@ -1622,97 +1623,61 @@ function Tune(overrides)
         COLDFIREPIT_BONUS_MULT = 2,
 
         PIGTORCH_RAIN_RATE = 2,
-        -- PIGTORCH_FUEL_MAX = night_time,
-        PIGTORCH_FUEL_MAX = night_time*MY_FULE_MODIFIER,
+        PIGTORCH_FUEL_MAX = night_time,
 
-        -- NIGHTLIGHT_FUEL_MAX = (night_time+dusk_time)*3,
-        NIGHTLIGHT_FUEL_MAX = (night_time+dusk_time)*3*MY_FULE_MODIFIER,
+        NIGHTLIGHT_FUEL_MAX = (night_time+dusk_time)*3,
         NIGHTLIGHT_FUEL_START = (night_time+dusk_time),
 
         TORCH_RAIN_RATE = 1.5,
-        -- TORCH_FUEL = night_time*1.25,
-        TORCH_FUEL = night_time*1.25*MY_FULE_MODIFIER,
+        TORCH_FUEL = night_time*1.25,
         TORCH_SHRINE_FUEL_RATE_MULT = .2,
 
-        -- MINIFAN_FUEL = day_time * 0.3,
-        MINIFAN_FUEL = day_time * 0.3*MY_FULE_MODIFIER,
+        MINIFAN_FUEL = day_time * 0.3,
 
-        -- COMPASS_FUEL = day_time * 4,
-        COMPASS_FUEL = day_time * 4*MY_FULE_MODIFIER,
+        COMPASS_FUEL = day_time * 4,
         COMPASS_ATTACK_DECAY_PERCENT = -0.3,
 
-        -- NIGHTSTICK_FUEL = night_time*6,
-        NIGHTSTICK_FUEL = night_time*6*MY_FULE_MODIFIER,
+        NIGHTSTICK_FUEL = night_time*6,
         LIGHTER_RAIN_RATE = 1,
-        -- LIGHTER_FUEL = total_day_time*1.25,
-        LIGHTER_FUEL = total_day_time*1.25*MY_FULE_MODIFIER,
+        LIGHTER_FUEL = total_day_time*1.25,
 
-        -- MINERHAT_LIGHTTIME = (night_time+dusk_time)*2.6,
-        MINERHAT_LIGHTTIME = (night_time+dusk_time)*2.6*MY_LIGHTTIME_MODIFIER,
-        -- LANTERN_LIGHTTIME = (night_time+dusk_time)*2.6,
-        LANTERN_LIGHTTIME = (night_time+dusk_time)*2.6*MY_LIGHTTIME_MODIFIER,
-        -- SPIDERHAT_PERISHTIME = 4*seg_time,
-        SPIDERHAT_PERISHTIME = 4*seg_time*MY_PERISHTIME_MODIFIER, -- 거미모자
+        MINERHAT_LIGHTTIME = (night_time+dusk_time)*2.6,
+        LANTERN_LIGHTTIME = (night_time+dusk_time)*2.6,
+        SPIDERHAT_PERISHTIME = 4*seg_time,
         SPIDERHAT_RANGE = 12,
-        -- ONEMANBAND_PERISHTIME = 6*seg_time,
-        ONEMANBAND_PERISHTIME = 6*seg_time*MY_PERISHTIME_MODIFIER, -- 원 맨 밴드
-        -- ONEMANBAND_RANGE = 12,
-        ONEMANBAND_RANGE = 30,
+        ONEMANBAND_PERISHTIME = 6*seg_time,
+        ONEMANBAND_RANGE = 12,
         HEATROCK_NUMUSES = 8,
 
-        -- GRASS_UMBRELLA_PERISHTIME = 2*total_day_time*perish_warp,
-        GRASS_UMBRELLA_PERISHTIME = 2*total_day_time*perish_warp*MY_PERISHTIME_MODIFIER,
-        -- UMBRELLA_PERISHTIME = total_day_time*6,
-        UMBRELLA_PERISHTIME = total_day_time*6*MY_PERISHTIME_MODIFIER,
-        -- EYEBRELLA_PERISHTIME = total_day_time*9,
-        EYEBRELLA_PERISHTIME = total_day_time*9*MY_PERISHTIME_MODIFIER, -- 눈우산
+        GRASS_UMBRELLA_PERISHTIME = 2*total_day_time*perish_warp,
+        UMBRELLA_PERISHTIME = total_day_time*6,
+        EYEBRELLA_PERISHTIME = total_day_time*9,
 
-        -- STRAWHAT_PERISHTIME = total_day_time*5,
-        STRAWHAT_PERISHTIME = total_day_time*5*MY_PERISHTIME_MODIFIER, 
-        -- EARMUFF_PERISHTIME = total_day_time*5,
-        EARMUFF_PERISHTIME = total_day_time*5*MY_PERISHTIME_MODIFIER, -- 토끼 귀마개
-        -- WINTERHAT_PERISHTIME = total_day_time*10,
-        WINTERHAT_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER,
-        -- BEEFALOHAT_PERISHTIME = total_day_time*10,
-        BEEFALOHAT_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER, 
+        STRAWHAT_PERISHTIME = total_day_time*5,
+        EARMUFF_PERISHTIME = total_day_time*5,
+        WINTERHAT_PERISHTIME = total_day_time*10,
+        BEEFALOHAT_PERISHTIME = total_day_time*10,
 
-        -- TRUNKVEST_PERISHTIME = total_day_time*15,
-        TRUNKVEST_PERISHTIME = total_day_time*15*MY_PERISHTIME_MODIFIER, -- 방풍 조끼
-        -- REFLECTIVEVEST_PERISHTIME = total_day_time*8,
-        REFLECTIVEVEST_PERISHTIME = total_day_time*8*MY_PERISHTIME_MODIFIER, -- 여름 조끼
-        -- HAWAIIANSHIRT_PERISHTIME = total_day_time*15,
-        HAWAIIANSHIRT_PERISHTIME = total_day_time*15*MY_PERISHTIME_MODIFIER, -- 꽃무늬 셔츠
-        -- SWEATERVEST_PERISHTIME = total_day_time*10,
-        SWEATERVEST_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER, -- 스웨터 조끼?
-        -- HUNGERBELT_PERISHTIME = total_day_time*8,
-        HUNGERBELT_PERISHTIME = total_day_time*8*MY_PERISHTIME_MODIFIER, -- 허기의 벨트?
-        -- BEARGERVEST_PERISHTIME = total_day_time*7,
-        BEARGERVEST_PERISHTIME = total_day_time*7*MY_PERISHTIME_MODIFIER, -- 곰소리 조끼?
-        -- RAINCOAT_PERISHTIME = total_day_time*10,
-        RAINCOAT_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER, -- 레인 코트
+        TRUNKVEST_PERISHTIME = total_day_time*15,
+        REFLECTIVEVEST_PERISHTIME = total_day_time*8,
+        HAWAIIANSHIRT_PERISHTIME = total_day_time*15,
+        SWEATERVEST_PERISHTIME = total_day_time*10,
+        HUNGERBELT_PERISHTIME = total_day_time*8,
+        BEARGERVEST_PERISHTIME = total_day_time*7,
+        RAINCOAT_PERISHTIME = total_day_time*10,
 
-        -- WALRUSHAT_PERISHTIME = total_day_time*25,
-        WALRUSHAT_PERISHTIME = total_day_time*25*MY_PERISHTIME_MODIFIER, -- 태머섄터
-        -- FEATHERHAT_PERISHTIME = total_day_time*8,
-        FEATHERHAT_PERISHTIME = total_day_time*8*MY_PERISHTIME_MODIFIER, -- 깃털모자
-        -- TOPHAT_PERISHTIME = total_day_time*8,
-        TOPHAT_PERISHTIME = total_day_time*8*MY_PERISHTIME_MODIFIER, -- 신사모
+        WALRUSHAT_PERISHTIME = total_day_time*25,
+        FEATHERHAT_PERISHTIME = total_day_time*8,
+        TOPHAT_PERISHTIME = total_day_time*8,
 
-        -- ICEHAT_PERISHTIME = total_day_time*4,
-        ICEHAT_PERISHTIME = total_day_time*4*MY_PERISHTIME_MODIFIER, -- 얼음모자
-        -- MOLEHAT_PERISHTIME = total_day_time*1.5,
-        MOLEHAT_PERISHTIME = total_day_time*1.5*MY_PERISHTIME_MODIFIER, -- 두더지 투시경
-        -- RAINHAT_PERISHTIME = total_day_time*10,
-        RAINHAT_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER, -- 방수모
-        -- CATCOONHAT_PERISHTIME = total_day_time*10,
-        CATCOONHAT_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER, -- 고양이 모자
-        -- GOGGLES_PERISHTIME = total_day_time*10,
-        GOGGLES_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER, -- 패션고글
-        -- NUTRIENTSGOGGLESHAT_PERISHTIME = total_day_time*10,
-        NUTRIENTSGOGGLESHAT_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER, -- 고급 원예사의 모자
+        ICEHAT_PERISHTIME = total_day_time*4,
+        MOLEHAT_PERISHTIME = total_day_time*1.5,
+        RAINHAT_PERISHTIME = total_day_time*10,
+        CATCOONHAT_PERISHTIME = total_day_time*10,
+        GOGGLES_PERISHTIME = total_day_time*10,
+        NUTRIENTSGOGGLESHAT_PERISHTIME = total_day_time*10,
 
-        -- WALTERHAT_PERISHTIME = total_day_time*10,
-        WALTERHAT_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER, -- 월터 모자
+        WALTERHAT_PERISHTIME = total_day_time*10,
 
         GRASS_REGROW_TIME = total_day_time*3,
         SAPLING_REGROW_TIME = total_day_time*4,
@@ -2288,13 +2253,10 @@ function Tune(overrides)
 
         RESURRECT_HEALTH = 50,
 
-        -- SEWINGKIT_USES = 5,
-        SEWINGKIT_USES = 10,
-        -- SEWINGKIT_REPAIR_VALUE = total_day_time*5,
-        SEWINGKIT_REPAIR_VALUE = total_day_time*5*MY_PERISHTIME_MODIFIER*2,
+        SEWINGKIT_USES = 5,
+        SEWINGKIT_REPAIR_VALUE = total_day_time*5,
 
-        -- SEWING_TAPE_REPAIR_VALUE = total_day_time*5,
-        SEWING_TAPE_REPAIR_VALUE = total_day_time*5*MY_PERISHTIME_MODIFIER*2,
+        SEWING_TAPE_REPAIR_VALUE = total_day_time*5,
 
         RABBIT_CARROT_LOYALTY = seg_time*8,
         RABBIT_POLITENESS_LOYALTY_BONUS = seg_time * 4,
@@ -2571,10 +2533,10 @@ function Tune(overrides)
         LAVAE_HATCH_FAIL_TIME = night_time,
 
         BEARGER_HEALTH = 3000 * 2, -- harder for multiplayer
-        BEARGER_DAMAGE = 200,
+		BEARGER_DAMAGE = 175,
         BEARGER_ATTACK_PERIOD = 3,
         BEARGER_MELEE_RANGE = 6,
-        BEARGER_ATTACK_RANGE = 6,
+		BEARGER_ATTACK_RANGE = 5,
         BEARGER_CALM_WALK_SPEED = 3,
         BEARGER_ANGRY_WALK_SPEED = 6,
         BEARGER_RUN_SPEED = 10,
@@ -3543,13 +3505,11 @@ function Tune(overrides)
 		WINTERS_FEAST_OVEN_BASE_COOK_TIME = night_time*.3333,
 
         FIRECRACKERS_STARTLE_RANGE = 10,
-        -- REDLANTERN_LIGHTTIME = total_day_time * 12,
-        REDLANTERN_LIGHTTIME = total_day_time * 12*MY_LIGHTTIME_MODIFIER,
+        REDLANTERN_LIGHTTIME = total_day_time * 12,
         REDLANTERN_RAIN_RATE = .25,
         PERDFAN_USES = 9, --tornado costs 2 charges
         PERDFAN_TORNADO_LIFETIME = 2,
-        -- DRAGONHAT_PERISHTIME = total_day_time, --only consumes while dancing
-        DRAGONHAT_PERISHTIME = total_day_time*MY_PERISHTIME_MODIFIER, -- ? --only consumes while dancing
+        DRAGONHAT_PERISHTIME = total_day_time, --only consumes while dancing
         YOTG_PERD_SPAWNCHANCE = .3,
         MAX_WALKABLE_PLATFORM_RADIUS = 4,
         GOOD_LEAKSPAWN_PLATFORM_RADIUS = 9, -- (MAX_WALKABLE_PLATFORM_RADIUS * 0.75) ^2
@@ -3734,8 +3694,8 @@ function Tune(overrides)
 		FRUITDRAGON =
 		{
 			HEALTH = 900,
-			WALK_SPEED = 0.5,
-			RUN_SPEED = 2,
+			WALK_SPEED = 1,
+			RUN_SPEED = 4,
 
 			FIND_HOME_RANGE = 8,
 			ENTITY_SLEEP_FIND_HOME_RANGE = 15,
@@ -4658,6 +4618,8 @@ function Tune(overrides)
 		SLINGSHOT_AMMO_DAMAGE_SLOW = wilson_attack * 0.5,		-- 17
 		SLINGSHOT_AMMO_DAMAGE_TRINKET_1 = wilson_attack * 1.75,	-- 59.5
 
+        SLINGSHOT_AMMO_DAMAGE_MAX = wilson_attack * 1.75, -- NOTE(DiogoW): Please update this when adding more powerful ammo.
+
         WALTER_TREE_SANITY_RADIUS = 10,
         WALTER_TREE_SANITY_THRESHOLD = 5,
         WALTER_TREE_SANITY_BONUS = 0.1, -- cancels out health drain while above 50% health
@@ -4971,8 +4933,7 @@ function Tune(overrides)
 		MINIBOATLANTERN_SPEED = 0.4,
 		MINIBOATLANTERN_ACCELERATION = 0.3*FRAMES,
 		MINIBOATLANTERN_WANDER_DIST = 6,
-        -- MINIBOATLANTERN_LIGHTTIME = total_day_time*6,
-        MINIBOATLANTERN_LIGHTTIME = total_day_time*6*MY_LIGHTTIME_MODIFIER,
+        MINIBOATLANTERN_LIGHTTIME = total_day_time*6,
         MINIBOATLANTERN_BURNTIME = 1.7,
 
 		YOT_CATCOON_SHRINE_SYMBOLS =
@@ -5271,8 +5232,7 @@ function Tune(overrides)
             BLOCK_TELEPORT_ON_HIT_DURATION_VARIANCE = 2,
         },
 
-        -- MAST_LAMP_LIGHTTIME = (night_time+dusk_time)*2,
-        MAST_LAMP_LIGHTTIME = (night_time+dusk_time)*2*MY_LIGHTTIME_MODIFIER,
+        MAST_LAMP_LIGHTTIME = (night_time+dusk_time)*2,
 
         WATERSTREAK_AOE_DIST = 3,
 
@@ -5315,8 +5275,7 @@ function Tune(overrides)
             NAP_LENGTH = seg_time * 4,
         },
 
-        -- BATNOSEHAT_PERISHTIME = 0.5*total_day_time*perish_warp,
-        BATNOSEHAT_PERISHTIME = 0.5*total_day_time*perish_warp*MY_PERISHTIME_MODIFIER, -- 워트 모자인가?
+        BATNOSEHAT_PERISHTIME = 0.5*total_day_time*perish_warp,
         HUNGERREGEN_TICK_RATE = 5,
         HUNGERREGEN_TICK_VALUE = 5 * (calories_per_day*2.5) / (0.5*total_day_time*perish_warp), -- Ensure that this matches the properties above!
 
@@ -5657,8 +5616,7 @@ function Tune(overrides)
         CARNIVAL_CROWKID_CAMPFIRE_WANDER_DIST = 8,
 		CARNIVAL_CROWKID_CAMPFIRE_SIT_DIST = 4,
 
-        -- CARNIVAL_VEST_PERISHTIME = total_day_time*5,
-        CARNIVAL_VEST_PERISHTIME = total_day_time*5*MY_PERISHTIME_MODIFIER, -- 까악제 조끼
+        CARNIVAL_VEST_PERISHTIME = total_day_time*5,
 
 		CARNIVALDECOR_LAMP_ACTIVATE_TIME = seg_time * 2,
 		CARNIVALDECOR_LAMP_TOKEN_TIME = total_day_time,
@@ -5905,8 +5863,7 @@ function Tune(overrides)
 
         MOONSTORM_SPARK_HEALTH = 100,
 
-        -- MOONSTORM_GOGGLES_PERISHTIME = total_day_time*1,
-        MOONSTORM_GOGGLES_PERISHTIME = total_day_time*1*MY_PERISHTIME_MODIFIER, -- Astroggles, 우주고글
+        MOONSTORM_GOGGLES_PERISHTIME = total_day_time*1,
 
         MOONSTORM_SPEED_MOD = .4,
 
@@ -6111,8 +6068,7 @@ function Tune(overrides)
 		TWIN2_MOUTH_CHARGETIMEOUT	= 0.50,
 		TWIN2_TAUNT_CHANCE			= 0.25,
 
-		-- EYEMASK_PERISHTIME = total_day_time*10,
-        EYEMASK_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER, -- eye mast, 눈알 가면
+		EYEMASK_PERISHTIME = total_day_time*10,
 
         SHIELDOFTERROR_DAMAGE = wilson_attack*1.5,
         SHIELDOFTERROR_ABSORPTION = .8*multiplayer_armor_absorption_modifier,
@@ -6408,10 +6364,8 @@ function Tune(overrides)
 		LIGHTCRAB_HEALTH = 25 * multiplayer_attack_modifier,
         LIGHTCRAB_PERISH_TIME = total_day_time * 5,
 
-        -- MONKEY_MEDIUM_HAT_PERISHTIME = total_day_time*6,
-        MONKEY_MEDIUM_HAT_PERISHTIME = total_day_time*6*MY_PERISHTIME_MODIFIER, -- 원숭이 모자?
-        -- POLLY_ROGERS_HAT_PERISHTIME = total_day_time*6,
-        POLLY_ROGERS_HAT_PERISHTIME = total_day_time*6*MY_PERISHTIME_MODIFIER, -- vhffl fhwjdml ahwk
+        MONKEY_MEDIUM_HAT_PERISHTIME = total_day_time*6,
+        POLLY_ROGERS_HAT_PERISHTIME = total_day_time*6,
 
         POLLY_ROGERS_WALK_SPEED= 7,
         POLLY_ROGERS_RUN_SPEED= 10,
@@ -6870,8 +6824,8 @@ function Tune(overrides)
         -- Damage over times.
         ACIDRAIN_DAMAGE_TIME = 1.5, -- How quickly the game polls to deal acidrain damage.
         ACIDRAIN_DAMAGE_PER_SECOND = 2.0,
-        ACIDRAIN_DAMAGE_FUELED_SCALER = 1.0,
-        ACIDRAIN_PERISHABLE_ROT_PERCENT = 0.01,
+        ACIDRAIN_DAMAGE_FUELED_SCALER = 2.0,
+        ACIDRAIN_PERISHABLE_ROT_PERCENT = 0.007,
         -- Side effects.
         ACIDRAIN_BOULDER_WORK = 3,
         ACIDRAIN_BOULDER_WORK_STARTS_PERCENT = 0.5, -- What percentage of the acid level of the pond should it be for work to start.
@@ -6913,8 +6867,7 @@ function Tune(overrides)
             },
         },
 
-        -- VOIDCLOTH_UMBRELLA_PERISHTIME = total_day_time*15,
-        VOIDCLOTH_UMBRELLA_PERISHTIME = total_day_time*15*MY_PERISHTIME_MODIFIER, -- ?
+        VOIDCLOTH_UMBRELLA_PERISHTIME = total_day_time*15,
         VOIDCLOTH_UMBRELLA_DAMAGE = wilson_attack,
 		VOIDCLOTH_UMBRELLA_DOME_RADIUS = 16,
 		VOIDCLOTH_UMBRELLA_DOME_RATE = 1.5,
@@ -6994,6 +6947,154 @@ function Tune(overrides)
         WOLFGANG_COACH_BUFF = 2,
         COACH_TIME_TO_INSPIRE = 7,
         COACH_TIME_BUFF_LASTS = 10,
+
+        -- Rifts 3
+
+        LUNARHAIL_DEBRIS_DAMAGE = 30,
+        LUNARHAIL_DEBRIS_DAMAGE_RADIUS = 2,
+        LUNARHAIL_DEBRIS_SPAWN_SCALE_RATE_MIN = 0.04,
+        LUNARHAIL_DEBRIS_SPAWN_SCALE_RATE_MAX = 0.4,
+        LUNARHAIL_DEBRIS_SPAWN_RADIUS = 60,
+        LUNARHAIL_DEBRIS_LIFETIME = 5, -- Seconds.
+        LUNARHAIL_DEBRIS_KEEP_CHANCE = 0.25,
+
+        LUNARHAIL_EVENT_COOLDOWN = 10 * total_day_time,
+        LUNARHAIL_EVENT_TIME = 3 * seg_time,
+
+		MUTATED_DEERCLOPS_HEALTH = 6000,
+		MUTATED_DEERCLOPS_DAMAGE = 150,
+		MUTATED_DEERCLOPS_PLANAR_DAMAGE = 30,
+		MUTATED_DEERCLOPS_ATTACK_RANGE = 13,
+		MUTATED_DEERCLOPS_ATTACK_PERIOD = 3,
+		MUTATED_DEERCLOPS_COMBO_ATTACK_PERIOD = 4,
+		MUTATED_DEERCLOPS_ICELANCE_DAMAGE = 200,
+		MUTATED_DEERCLOPS_ICELANCE_RANGE = { min = 6, max = 14 },
+		MUTATED_DEERCLOPS_STAGGER_TIME = 6,
+		MUTATED_DEERCLOPS_FRENZY_MIN_TIME = 12,
+		MUTATED_DEERCLOPS_FRENZY_HP = 1200 / 6000,
+
+		MUTATED_BEARGER_HEALTH = 8000,
+		MUTATED_BEARGER_DAMAGE = 175,
+		MUTATED_BEARGER_PLANAR_DAMAGE = 30,
+		MUTATED_BEARGER_ATTACK_RANGE = 6,
+		MUTATED_BEARGER_ATTACK_PERIOD = 3,
+		MUTATED_BEARGER_STAGGER_TIME = 6,
+        MUTATED_BEARGER_TARGET_RANGE = 14,
+		MUTATED_BEARGER_SINKHOLERADIUS = 3,
+		MUTATED_BEARGER_RECOVERY_HP = 800 / 8000,
+
+		MUTATED_WARG_HEALTH = 3000,
+		MUTATED_WARG_STAGGER_TIME = 6,
+		MUTATED_WARG_COLDFIRE_TEMPERATURE = -2,
+		MUTATED_WARG_FLAMETHROWER_CD = 8,
+		MUTATED_WARG_PLANAR_DAMAGE = 30,
+		MUTATED_WARG_FLAMETHROWER_DAMAGE = 20,
+
+		KOALEFANT_CARCASS_MEAT_PER_LEVEL = 14, --3 levels
+		KOALEFANT_CARCASS_DECAY_TIME = total_day_time * 0.5,
+
+        CORPSE_GESTALT_WALK_SPEED = 15,
+        CORPSE_GESTALT_RUN_SPEED = 20,
+
+        FROG_RAIN_LUNARFROG_CHANCE = 0.6,
+
+        LUNARFROG_HEALTH = 150,
+        LUNARFROG_DAMAGE = 10,
+        LUNARFROG_PLANAR_DAMAGE = 5,
+        LUNARFROG_ATTACK_PERIOD = 1,
+        LUNARFROG_TARGET_DIST = 4,
+        LUNARFROG_ONATTACK_GROGGINESS = 0.35,
+        LUNARFROG_ADDITIONAL_LOOT_CHANCE = 0.5,
+        LUNARFROG_ITEMS_TO_STEAL_MIN = 2,
+        LUNARFROG_ITEMS_TO_STEAL_MAX = 4,
+
+        BEARGERFUR_SACK_PRESERVER_RATE = 0.05,
+
+        DEERCLOPSEYEBALL_SENTRYWARD_RADIUS = 35,
+        DEERCLOPSEYEBALL_SENTRYWARD_GROUND_ICE_RADIUS = 3.5,
+        DEERCLOPSEYEBALL_SENTRYWARD_TEMPERATURE_OVERRIDE = -10,
+
+        DEERCLOPSEYEBALL_SENTRYWARD_ROCK_ICE_SPAWN_BASETIME = 7 * total_day_time,
+        DEERCLOPSEYEBALL_SENTRYWARD_ROCK_ICE_SPAWN_VARIANCE = 5 * total_day_time,
+        DEERCLOPSEYEBALL_SENTRYWARD_ROCK_ICE_MAX_DENSITY_RAD = 12,
+        DEERCLOPSEYEBALL_SENTRYWARD_ROCK_ICE_MAX_DENSITY = 6,
+        DEERCLOPSEYEBALL_SENTRYWARD_ROCK_ICE_MIN_SPACING = 5,
+
+        ROCK_ICE_TEMPERATURE_GROW_MELT_TIME = 5 * total_day_time,
+
+        HOUNDSTOOTH_BLOWPIPE_DAMAGE = wilson_attack,
+        HOUNDSTOOTH_BLOWPIPE_PLANAR_DAMAGE = wilson_attack,
+        HOUNDSTOOTH_BLOWPIPE_VS_SHADOW_BONUS = 1.1, -- Multiplier.
+        HOUNDSTOOTH_BLOWPIPE_PROJECTILE_SPEED = 25,
+        HOUNDSTOOTH_BLOWPIPE_ATTACK_DIST = 12,
+        HOUNDSTOOTH_BLOWPIPE_ATTACK_DIST_MAX = 16,
+
+        VASE_FLOWER_SWAPS =
+        {
+            { lightsource = false,  sanityboost = 5 },
+            { lightsource = false,  sanityboost = 5 },
+            { lightsource = false,  sanityboost = 5 },
+            { lightsource = false,  sanityboost = 5 },
+            { lightsource = true,   sanityboost = 0 },
+            { lightsource = false,  sanityboost = 5 },
+            { lightsource = true,   sanityboost = 0 },
+            { lightsource = true,   sanityboost = 0 },
+            { lightsource = true,   sanityboost = 0 },
+            { lightsource = false,  sanityboost = 5 },
+            { lightsource = false,  sanityboost = 5 },
+            { lightsource = false,  sanityboost = 5 },
+            { lightsource = false,  sanityboost = 5 },
+            { lightsource = false,  sanityboost = 5 },
+            { lightsource = false,  sanityboost = 5 },
+        },
+
+        VASE_FLOWER_MAP =
+        {   -- These are indexes into VASE_FLOWER_SWAPS above.
+            petals              = { 1, 2, 3, 4, 6, 10, 11, 12 },
+            lightbulb           = { 5, 7, 8 },
+            wormlight           = { 9 },
+            wormlight_lesser    = { 9 },
+            forgetmelots        = { 13, 14 },
+            moon_tree_blossom   = { 15 },
+        },
+
+        PHONOGRAPH_PLAY_TIME = 64,
+        PHONOGRAPH_TEND_RANGE = 8,
+
+        --NOTE: + 20 * 5 <= 20 hits of defending 5 planar damage
+        ARMORPUNK = wilson_health*6*multiplayer_armor_durability_modifier + 20 * 5,
+        ARMORPUNK_ABSORPTION = 0.85*multiplayer_armor_absorption_modifier,
+        ARMORPUNK_PLANAR_DEF = 5,
+
+        ARMORPUNK_SPEED_MULT_STAGE0 = 1.10,
+        ARMORPUNK_SPEED_MULT_STAGE1 = 1.15,
+        ARMORPUNK_SPEED_MULT_STAGE2 = 1.20,
+        ARMORPUNK_SPEED_MULT_STAGE3 = 1.30,
+
+        ARMORPUNK_STAGE1 = 10,
+        ARMORPUNK_STAGE2 = 16,
+        ARMORPUNK_STAGE3 = 20,
+
+        --NOTE: + 20 * 5 <= 20 hits of defending 5 planar damage
+        ARMOR_WAGPUNK_HAT = wilson_health * 6 * multiplayer_armor_durability_modifier + 20 * 5,
+        ARMOR_WAGPUNK_HAT_ABSORPTION = 0.85 * multiplayer_armor_absorption_modifier,
+        ARMOR_WAGPUNK_HAT_PLANAR_DEF = 5,
+
+        ARMOR_WAGPUNK_HAT_STAGE0 = 1.05,
+        ARMOR_WAGPUNK_HAT_STAGE1 = 1.10,
+        ARMOR_WAGPUNK_HAT_STAGE2 = 1.15,
+        ARMOR_WAGPUNK_HAT_STAGE3 = 1.20,
+
+        WAGPUNK_MAXRANGE = 16,
+        WAGPUNK_SYNC_TIME = 3,
+
+        WAGSTAFF_MACHINERY_BLUEPRINT_CHANCE = 0.4,
+        WAGSTAFF_MACHINERY_NUM_BLUEPRINTS = 1,
+
+        WAGSTAFF_MACHINE_HINT_TIME = { min = total_day_time, max = 15*total_day_time },
+
+        WAGSTAFF_SPAWN_MACHINE_TIME = 4 * total_day_time,
+        WAGSTAFF_SPAWN_MACHINE_TIME_VARIATION = 3 * total_day_time,
     }
 
     TUNING_MODIFIERS = {}

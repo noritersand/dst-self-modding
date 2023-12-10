@@ -179,7 +179,7 @@ return{
             BURNING = "Fire! Don't like fire!",
             INUSE = "Someone else's",
             NOTENOUGHHAIR = "Not fuzzy enough",
-            NOOCCUPANT = "Need Shaggy Buddy.",
+            NOOCCUPANT = "Need Shaggy Buddy",
         },
         ATTUNE =
         {
@@ -522,6 +522,10 @@ return{
 	ANNOUNCE_HUNT_BEAST_NEARBY = "Prints!",
 	ANNOUNCE_HUNT_LOST_TRAIL = "Prints gone",
 	ANNOUNCE_HUNT_LOST_TRAIL_SPRING = "Prints gone",
+    ANNOUNCE_HUNT_START_FORK = "To big scary!",
+    ANNOUNCE_HUNT_SUCCESSFUL_FORK = "Found big scary!",
+    ANNOUNCE_HUNT_WRONG_FORK = "Big scary found first",
+    ANNOUNCE_HUNT_AVOID_FORK = "No big scary this way",
 	ANNOUNCE_INV_FULL = "Too much stuff",
 	ANNOUNCE_KNOCKEDOUT = "Wha--?",
 	ANNOUNCE_LOWRESEARCH = "Learned stuff",
@@ -608,7 +612,7 @@ return{
     ANNOUNCE_REVIVED_OTHER_CORPSE = "Made better",
     ANNOUNCE_REVIVED_FROM_CORPSE = "Thank you!",
 
-    ANNOUNCE_FLARE_SEEN = "See friend make pretty light.",
+    ANNOUNCE_FLARE_SEEN = "See friend make pretty light",
     ANNOUNCE_MEGA_FLARE_SEEN = "Look out friend! Bad things coming!",
     ANNOUNCE_OCEAN_SILHOUETTE_INCOMING = "Water friend?",
 
@@ -895,6 +899,8 @@ return{
 
     ANNOUNCE_SCRAPBOOK_FULL = "Book filled up!",
 
+    ANNOUNCE_CHAIR_ON_FIRE = "This fine",
+
     ANNOUNCE_COACH = 
     {
         "only_used_by_wolfgang",
@@ -1089,7 +1095,7 @@ return{
             GHOST = "Hello, Floaty Friend",
             BEAVER = "Friend Eater! Keep away!",
             BEAVERGHOST = "Can't eat friends anymore",
-            MOOSE = "Like Branch Head better than Friend Eater.",
+            MOOSE = "Like Branch Head better than Friend Eater",
             MOOSEGHOST = "Branch Head friend is floaty!",
             GOOSE = "Oh. Friend made small!",
             GOOSEGHOST = "Hello floaty friend!",
@@ -1832,6 +1838,9 @@ return{
         CHESSPIECE_EYEOFTERROR = "Not watching?",
         CHESSPIECE_TWINSOFTERROR = "Can't see now",
         CHESSPIECE_DAYWALKER = "Hello? Can't talk?",
+        CHESSPIECE_DEERCLOPS_MUTATED = "Eye ouchie still ouchie?",
+        CHESSPIECE_WARG_MUTATED = "Woofer, stay",
+        CHESSPIECE_BEARGER_MUTATED = "Fuzzy hungry?",
 
         CHESSJUNK1 = "Machine stuff",
         CHESSJUNK2 = "Lots of machine stuff",
@@ -2208,6 +2217,7 @@ return{
 		KNIGHT = "Neigh machine",
 		KOALEFANT_SUMMER = "Bruamp! Bruamp!",
 		KOALEFANT_WINTER = "Bruamp! Bruamp!",
+		KOALEFANT_CARCASS = "Braump...? Not anymore",
 		KRAMPUS = "Mean Branch Head",
 		KRAMPUS_SACK = "Full of stuff?",
 		LEIF = "Hello!... Hello?",
@@ -3501,7 +3511,7 @@ return{
         	GENERIC = "Pool party!",
         	BOMBED = "Warm now. Glowy",
         	GLASS = "Ice? Nope",
-			EMPTY = "Muddy.",
+			EMPTY = "Muddy",
         },
         MOONGLASS = "Ouch! Sharp!",
         MOONGLASS_CHARGED = "Glowy sharp things",
@@ -3581,7 +3591,7 @@ return{
         BOAT_GRASS_ITEM = "Friends help make Floaty",
         STEERINGWHEEL_ITEM = "For pointing Floaty",
         ANCHOR_ITEM = "Heavy...",
-        MAST_ITEM = "Tall friend for Floater.",
+        MAST_ITEM = "Tall friend for Floater",
         MUTATEDHOUND =
         {
         	DEAD = "Dead now?",
@@ -3729,7 +3739,7 @@ return{
 
         WOBSTER_SHELLER = "Snappy Glub Glub",
         WOBSTER_DEN = "Wet nest",
-        WOBSTER_SHELLER_DEAD = "Oh. Belly stuff now.",
+        WOBSTER_SHELLER_DEAD = "Oh. Belly stuff now",
         WOBSTER_SHELLER_DEAD_COOKED = "Why changed color?",
 
         LOBSTERBISQUE = "Still snappy?",
@@ -4451,6 +4461,10 @@ return{
         BIRD_MUTANT_SPITTER = "Tweeter sick?",
 
         WAGSTAFF_NPC = "Hello! Oh, goodbye... oh, hello!",
+
+        WAGSTAFF_NPC_MUTATIONS = "Need help?",
+        WAGSTAFF_NPC_WAGPUNK = "Follow?",
+
         ALTERGUARDIAN_CONTAINED = "Locked away",
 
         WAGSTAFF_TOOL_1 = "Thing?",
@@ -4682,7 +4696,7 @@ return{
         CANNONBALL_ROCK_ITEM = "Rock big, good for go boom",
 
         OCEAN_TRAWLER = {
-            GENERIC = "Catch Glub Glubs.",
+            GENERIC = "Catch Glub Glubs",
             LOWERED = "Busy now",
             CAUGHT = "Yay!!",
             ESCAPED = "Aww... Glub Glubs leave?",
@@ -4703,7 +4717,7 @@ return{
             ACTIVATED = "Calling big Pull Rock here",
         },
         DOCK_KIT = "Makes home for Floaties",
-        DOCK_WOODPOSTS_ITEM = "Plant friends on dock.",
+        DOCK_WOODPOSTS_ITEM = "Plant friends on dock",
 
         MONKEYHUT =
         {
@@ -4913,6 +4927,106 @@ return{
 		SUPPORT_PILLAR_DREADSTONE_BROKEN = "Goodbye, tall rocks",
 
         WOLFGANG_WHISTLE = "Muscle man's tweet-maker",
+
+        -- Rifts 3
+
+        MUTATEDDEERCLOPS = "Branch head? What in eye?",
+        MUTATEDWARG = "Weird Woofer",
+        MUTATEDBEARGER = "Scary fuzzy big and mean and stinky",
+
+        LUNARFROG = "Ribbit?",
+
+        DEERCLOPSCORPSE =
+        {
+            GENERIC  = "Branch head dead",
+            BURNING  = "Branch head burning",
+            REVIVING = "Branch head back. Uh oh",
+        },
+
+        WARGCORPSE =
+        {
+            GENERIC  = "Woofer stay. Good Woofer",
+            BURNING  = "Bye bye forever, Woofer",
+            REVIVING = "No no no. Bad Wooofer!",
+        },
+
+        BEARGERCORPSE =
+        {
+            GENERIC  = "Fuzzy sleeping?",
+            BURNING  = "Fuzzy on fire!",
+            REVIVING = "Stay gone fuzzy! Stay gone!",
+        },
+
+        BEARGERFUR_SACK = "Carry belly stuff. Thanks Fuzzy!",
+        HOUNDSTOOTH_BLOWPIPE = "Toothy ptooey",
+        DEERCLOPSEYEBALL_SENTRYWARD =
+        {
+            GENERIC = "Branch head eye make cold",    -- Enabled.
+            NOEYEBALL = "Where branch head eye?",  -- Disabled.
+        },
+        DEERCLOPSEYEBALL_SENTRYWARD_KIT = "Not done yet",
+
+        SECURITY_PULSE_CAGE = "Big nothing",
+        SECURITY_PULSE_CAGE_FULL = "Hello, pretty light ball",
+
+		CARPENTRY_STATION =
+        {
+            GENERIC = "Ooh, sharp",
+            BURNT = "Oops, burnt",
+        },
+
+        WOOD_TABLE = -- Shared between the round and square tables.
+        {
+            GENERIC = "Empty table",
+            HAS_ITEM = "Table full",
+            BURNT = "Oh. Bye bye",
+        },
+
+        WOOD_CHAIR =
+        {
+            GENERIC = "Sit Place",
+            OCCUPIED = "That okay! Will sit somewhere else",
+            BURNT = "Oh no!",
+        },
+
+        DECOR_CENTERPIECE = "Hm. Hmmmmm. Art",
+        DECOR_LAMP = "Little light",
+        DECOR_FLOWERVASE =
+        {
+            GENERIC = "Little home for little friend",
+            EMPTY = "Needs friend for cup",
+            WILTED = "Sick, Friend?",
+            FRESHLIGHT = "Light Friend looks good!",
+            OLDLIGHT = "Sick, Light Friend?",
+        },
+        DECOR_PICTUREFRAME =
+        {
+            GENERIC = "Huh? Not real!",
+            UNDRAWN = "Nothing inside",
+        },
+        DECOR_PORTRAITFRAME = "Oh! Hello!",
+
+        PHONOGRAPH = "Singing box",
+        RECORD = "Forever song",
+        RECORD_CREEPYFOREST = "Friend song!",
+        RECORD_DANGER = "Scary time",
+        RECORD_DAWN = "Good Morning!",
+        RECORD_DRSTYLE = "Bouncy!",
+        RECORD_DUSK = "Night night",
+        RECORD_EFS = "Bouncy!",
+        RECORD_END = "Bye bye",
+        RECORD_MAIN = "Happy sad",
+        RECORD_WORKTOBEDONE = "Busy busy",
+
+        ARCHIVE_ORCHESTRINA_MAIN = "Singing floor",
+
+        WAGPUNKHAT = "Just like robot friend!",
+        ARMORWAGPUNK = "Be strong like robot friend!",
+        WAGSTAFF_MACHINERY = "Lonely stuff",
+        WAGPUNK_BITS = "Robot buildy bits?",
+        WAGPUNKBITS_KIT = "Robot clothes fixer",
+
+        WAGSTAFF_MUTATIONS_NOTE = "Book leaf?",
     },
 
     DESCRIBE_GENERIC = "Friend?",
