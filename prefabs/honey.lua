@@ -42,11 +42,6 @@ local function fn()
 
     inst:AddComponent("inspectable")
 
-    inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
-    inst.components.perishable:StartPerishing()
-    inst.components.perishable.onperishreplacement = "spoiled_food"
-
     inst:AddComponent("inventoryitem")
 
     MakeHauntableLaunchAndPerish(inst)
