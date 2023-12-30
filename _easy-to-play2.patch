@@ -1,0 +1,17 @@
+diff --git a/tuning.lua b/tuning.lua
+index 5a14da2..7282711 100644
+--- a/tuning.lua
++++ b/tuning.lua
+@@ -28,9 +28,9 @@ function Tune(overrides)
+     local dusk_time = seg_time * dusk_segs
+     local night_time = seg_time * night_segs
+ 
+-    local multiplayer_attack_modifier = 1--0.6--0.75
+-    local multiplayer_goldentool_modifier = 1--0.5--0.75
+-    local multiplayer_armor_durability_modifier = 0.7
++    local multiplayer_attack_modifier = 10--0.6--0.75
++    local multiplayer_goldentool_modifier = 2--0.5--0.75
++    local multiplayer_armor_durability_modifier = 1.5
+     local multiplayer_armor_absorption_modifier = 1--0.75
+     local multiplayer_wildlife_respawn_modifier = 1--2
+ 
