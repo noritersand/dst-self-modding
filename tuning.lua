@@ -28,9 +28,9 @@ function Tune(overrides)
     local dusk_time = seg_time * dusk_segs
     local night_time = seg_time * night_segs
 
-    local multiplayer_attack_modifier = 10--0.6--0.75
-    local multiplayer_goldentool_modifier = 2--0.5--0.75
-    local multiplayer_armor_durability_modifier = 1.5
+    local multiplayer_attack_modifier = 1--0.6--0.75
+    local multiplayer_goldentool_modifier = 1--0.5--0.75
+    local multiplayer_armor_durability_modifier = 0.7
     local multiplayer_armor_absorption_modifier = 1--0.75
     local multiplayer_wildlife_respawn_modifier = 1--2
 
@@ -48,10 +48,6 @@ function Tune(overrides)
 
     local OCEAN_NOISE_BASE_SCALE = 10
     local OCEAN_SPEED_BASE_SCALE = 0.01
-
-    local MY_PERISHTIME_MODIFIER = 4
-    local MY_LIGHTTIME_MODIFIER = 3
-    local MY_FULE_MODIFIER = 3
 
     TUNING =
     {
@@ -1594,12 +1590,12 @@ function Tune(overrides)
 
         WET_FUEL_PENALTY = 0.75,
 
-        TINY_FUEL = seg_time*.25 * MY_FULE_MODIFIER,
-        SMALL_FUEL = seg_time * .5 * MY_FULE_MODIFIER,
-        MED_FUEL = seg_time * 1.5 * MY_FULE_MODIFIER,
-        MED_LARGE_FUEL = seg_time * 3 * MY_FULE_MODIFIER,
-        LARGE_FUEL = seg_time * 6 * MY_FULE_MODIFIER,
-        HUGE_FUEL = seg_time * 9 * MY_FULE_MODIFIER,
+        TINY_FUEL = seg_time*.25,
+        SMALL_FUEL = seg_time * .5,
+        MED_FUEL = seg_time * 1.5,
+        MED_LARGE_FUEL = seg_time * 3,
+        LARGE_FUEL = seg_time * 6,
+        HUGE_FUEL = seg_time * 9,
 
         TINY_BURNTIME = seg_time*.1,
         SMALL_BURNTIME = seg_time*.25,
@@ -1629,61 +1625,61 @@ function Tune(overrides)
         COLDFIREPIT_BONUS_MULT = 2,
 
         PIGTORCH_RAIN_RATE = 2,
-        PIGTORCH_FUEL_MAX = night_time*MY_FULE_MODIFIER,
+        PIGTORCH_FUEL_MAX = night_time,
 
-        NIGHTLIGHT_FUEL_MAX = (night_time+dusk_time)*3*MY_FULE_MODIFIER,
+        NIGHTLIGHT_FUEL_MAX = (night_time+dusk_time)*3,
         NIGHTLIGHT_FUEL_START = (night_time+dusk_time),
 
         TORCH_RAIN_RATE = 1.5,
-        TORCH_FUEL = night_time*1.25*MY_FULE_MODIFIER,
+        TORCH_FUEL = night_time*1.25,
         TORCH_SHRINE_FUEL_RATE_MULT = .2,
 
-        MINIFAN_FUEL = day_time * 0.3*MY_FULE_MODIFIER,
+        MINIFAN_FUEL = day_time * 0.3,
 
-        COMPASS_FUEL = day_time * 4*MY_FULE_MODIFIER,
+        COMPASS_FUEL = day_time * 4,
         COMPASS_ATTACK_DECAY_PERCENT = -0.3,
 
-        NIGHTSTICK_FUEL = night_time*6*MY_FULE_MODIFIER,
+        NIGHTSTICK_FUEL = night_time*6,
         LIGHTER_RAIN_RATE = 1,
-        LIGHTER_FUEL = total_day_time*1.25*MY_FULE_MODIFIER,
+        LIGHTER_FUEL = total_day_time*1.25,
 
-        MINERHAT_LIGHTTIME = (night_time+dusk_time)*2.6*MY_LIGHTTIME_MODIFIER,
-        LANTERN_LIGHTTIME = (night_time+dusk_time)*2.6*MY_LIGHTTIME_MODIFIER,
-        SPIDERHAT_PERISHTIME = 4*seg_time*MY_PERISHTIME_MODIFIER,
+        MINERHAT_LIGHTTIME = (night_time+dusk_time)*2.6,
+        LANTERN_LIGHTTIME = (night_time+dusk_time)*2.6,
+        SPIDERHAT_PERISHTIME = 4*seg_time,
         SPIDERHAT_RANGE = 12,
-        ONEMANBAND_PERISHTIME = 6*seg_time*MY_PERISHTIME_MODIFIER,
-        ONEMANBAND_RANGE = 30,
+        ONEMANBAND_PERISHTIME = 6*seg_time,
+        ONEMANBAND_RANGE = 12,
         HEATROCK_NUMUSES = 8,
 
-        GRASS_UMBRELLA_PERISHTIME = 2*total_day_time*perish_warp*MY_PERISHTIME_MODIFIER,
-        UMBRELLA_PERISHTIME = total_day_time*6*MY_PERISHTIME_MODIFIER,
-        EYEBRELLA_PERISHTIME = total_day_time*9*MY_PERISHTIME_MODIFIER,
+        GRASS_UMBRELLA_PERISHTIME = 2*total_day_time*perish_warp,
+        UMBRELLA_PERISHTIME = total_day_time*6,
+        EYEBRELLA_PERISHTIME = total_day_time*9,
 
-        STRAWHAT_PERISHTIME = total_day_time*5*MY_PERISHTIME_MODIFIER,
-        EARMUFF_PERISHTIME = total_day_time*5*MY_PERISHTIME_MODIFIER,
-        WINTERHAT_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER,
-        BEEFALOHAT_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER,
+        STRAWHAT_PERISHTIME = total_day_time*5,
+        EARMUFF_PERISHTIME = total_day_time*5,
+        WINTERHAT_PERISHTIME = total_day_time*10,
+        BEEFALOHAT_PERISHTIME = total_day_time*10,
 
-        TRUNKVEST_PERISHTIME = total_day_time*15*MY_PERISHTIME_MODIFIER,
-        REFLECTIVEVEST_PERISHTIME = total_day_time*8*MY_PERISHTIME_MODIFIER,
-        HAWAIIANSHIRT_PERISHTIME = total_day_time*15*MY_PERISHTIME_MODIFIER,
-        SWEATERVEST_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER,
-        HUNGERBELT_PERISHTIME = total_day_time*8*MY_PERISHTIME_MODIFIER,
-        BEARGERVEST_PERISHTIME = total_day_time*7*MY_PERISHTIME_MODIFIER,
-        RAINCOAT_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER,
+        TRUNKVEST_PERISHTIME = total_day_time*15,
+        REFLECTIVEVEST_PERISHTIME = total_day_time*8,
+        HAWAIIANSHIRT_PERISHTIME = total_day_time*15,
+        SWEATERVEST_PERISHTIME = total_day_time*10,
+        HUNGERBELT_PERISHTIME = total_day_time*8,
+        BEARGERVEST_PERISHTIME = total_day_time*7,
+        RAINCOAT_PERISHTIME = total_day_time*10,
 
-        WALRUSHAT_PERISHTIME = total_day_time*25*MY_PERISHTIME_MODIFIER,
-        FEATHERHAT_PERISHTIME = total_day_time*8*MY_PERISHTIME_MODIFIER,
-        TOPHAT_PERISHTIME = total_day_time*8*MY_PERISHTIME_MODIFIER,
+        WALRUSHAT_PERISHTIME = total_day_time*25,
+        FEATHERHAT_PERISHTIME = total_day_time*8,
+        TOPHAT_PERISHTIME = total_day_time*8,
 
-        ICEHAT_PERISHTIME = total_day_time*4*MY_PERISHTIME_MODIFIER,
-        MOLEHAT_PERISHTIME = total_day_time*1.5*MY_PERISHTIME_MODIFIER,
-        RAINHAT_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER,
-        CATCOONHAT_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER,
-        GOGGLES_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER,
-        NUTRIENTSGOGGLESHAT_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER,
+        ICEHAT_PERISHTIME = total_day_time*4,
+        MOLEHAT_PERISHTIME = total_day_time*1.5,
+        RAINHAT_PERISHTIME = total_day_time*10,
+        CATCOONHAT_PERISHTIME = total_day_time*10,
+        GOGGLES_PERISHTIME = total_day_time*10,
+        NUTRIENTSGOGGLESHAT_PERISHTIME = total_day_time*10,
 
-        WALTERHAT_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER,
+        WALTERHAT_PERISHTIME = total_day_time*10,
 
         GRASS_REGROW_TIME = total_day_time*3,
         SAPLING_REGROW_TIME = total_day_time*4,
@@ -2259,10 +2255,10 @@ function Tune(overrides)
 
         RESURRECT_HEALTH = 50,
 
-        SEWINGKIT_USES = 10,
-        SEWINGKIT_REPAIR_VALUE = total_day_time*5*MY_PERISHTIME_MODIFIER,
+        SEWINGKIT_USES = 5,
+        SEWINGKIT_REPAIR_VALUE = total_day_time*5,
 
-        SEWING_TAPE_REPAIR_VALUE = total_day_time*5*MY_PERISHTIME_MODIFIER,
+        SEWING_TAPE_REPAIR_VALUE = total_day_time*5,
 
         RABBIT_CARROT_LOYALTY = seg_time*8,
         RABBIT_POLITENESS_LOYALTY_BONUS = seg_time * 4,
@@ -3516,11 +3512,11 @@ function Tune(overrides)
 		WINTERS_FEAST_OVEN_BASE_COOK_TIME = night_time*.3333,
 
         FIRECRACKERS_STARTLE_RANGE = 10,
-        REDLANTERN_LIGHTTIME = total_day_time * 12*MY_LIGHTTIME_MODIFIER,
+        REDLANTERN_LIGHTTIME = total_day_time * 12,
         REDLANTERN_RAIN_RATE = .25,
         PERDFAN_USES = 9, --tornado costs 2 charges
         PERDFAN_TORNADO_LIFETIME = 2,
-        DRAGONHAT_PERISHTIME = total_day_time*MY_PERISHTIME_MODIFIER, --only consumes while dancing
+        DRAGONHAT_PERISHTIME = total_day_time, --only consumes while dancing
         YOTG_PERD_SPAWNCHANCE = .3,
         MAX_WALKABLE_PLATFORM_RADIUS = 4,
         GOOD_LEAKSPAWN_PLATFORM_RADIUS = 9, -- (MAX_WALKABLE_PLATFORM_RADIUS * 0.75) ^2
@@ -4951,7 +4947,7 @@ function Tune(overrides)
 		MINIBOATLANTERN_SPEED = 0.4,
 		MINIBOATLANTERN_ACCELERATION = 0.3*FRAMES,
 		MINIBOATLANTERN_WANDER_DIST = 6,
-        MINIBOATLANTERN_LIGHTTIME = total_day_time*6*MY_LIGHTTIME_MODIFIER,
+        MINIBOATLANTERN_LIGHTTIME = total_day_time*6,
         MINIBOATLANTERN_BURNTIME = 1.7,
 
 		YOT_CATCOON_SHRINE_SYMBOLS =
@@ -5250,7 +5246,7 @@ function Tune(overrides)
             BLOCK_TELEPORT_ON_HIT_DURATION_VARIANCE = 2,
         },
 
-        MAST_LAMP_LIGHTTIME = (night_time+dusk_time)*2*MY_LIGHTTIME_MODIFIER,
+        MAST_LAMP_LIGHTTIME = (night_time+dusk_time)*2,
 
         WATERSTREAK_AOE_DIST = 3,
 
@@ -5293,7 +5289,7 @@ function Tune(overrides)
             NAP_LENGTH = seg_time * 4,
         },
 
-        BATNOSEHAT_PERISHTIME = 0.5*total_day_time*perish_warp*MY_PERISHTIME_MODIFIER,
+        BATNOSEHAT_PERISHTIME = 0.5*total_day_time*perish_warp,
         HUNGERREGEN_TICK_RATE = 5,
         HUNGERREGEN_TICK_VALUE = 5 * (calories_per_day*2.5) / (0.5*total_day_time*perish_warp), -- Ensure that this matches the properties above!
 
@@ -5634,7 +5630,7 @@ function Tune(overrides)
         CARNIVAL_CROWKID_CAMPFIRE_WANDER_DIST = 8,
 		CARNIVAL_CROWKID_CAMPFIRE_SIT_DIST = 4,
 
-        CARNIVAL_VEST_PERISHTIME = total_day_time*5*MY_PERISHTIME_MODIFIER,
+        CARNIVAL_VEST_PERISHTIME = total_day_time*5,
 
 		CARNIVALDECOR_LAMP_ACTIVATE_TIME = seg_time * 2,
 		CARNIVALDECOR_LAMP_TOKEN_TIME = total_day_time,
@@ -5881,7 +5877,7 @@ function Tune(overrides)
 
         MOONSTORM_SPARK_HEALTH = 100,
 
-        MOONSTORM_GOGGLES_PERISHTIME = total_day_time*1*MY_PERISHTIME_MODIFIER,
+        MOONSTORM_GOGGLES_PERISHTIME = total_day_time*1,
 
         MOONSTORM_SPEED_MOD = .4,
 
@@ -6086,7 +6082,7 @@ function Tune(overrides)
 		TWIN2_MOUTH_CHARGETIMEOUT	= 0.50,
 		TWIN2_TAUNT_CHANCE			= 0.25,
 
-		EYEMASK_PERISHTIME = total_day_time*10*MY_PERISHTIME_MODIFIER,
+		EYEMASK_PERISHTIME = total_day_time*10,
 
         SHIELDOFTERROR_DAMAGE = wilson_attack*1.5,
         SHIELDOFTERROR_ABSORPTION = .8*multiplayer_armor_absorption_modifier,
@@ -6382,8 +6378,8 @@ function Tune(overrides)
 		LIGHTCRAB_HEALTH = 25 * multiplayer_attack_modifier,
         LIGHTCRAB_PERISH_TIME = total_day_time * 5,
 
-        MONKEY_MEDIUM_HAT_PERISHTIME = total_day_time*6*MY_PERISHTIME_MODIFIER,
-        POLLY_ROGERS_HAT_PERISHTIME = total_day_time*6*MY_PERISHTIME_MODIFIER,
+        MONKEY_MEDIUM_HAT_PERISHTIME = total_day_time*6,
+        POLLY_ROGERS_HAT_PERISHTIME = total_day_time*6,
 
         POLLY_ROGERS_WALK_SPEED= 7,
         POLLY_ROGERS_RUN_SPEED= 10,
@@ -6989,7 +6985,7 @@ function Tune(overrides)
             },
         },
 
-        VOIDCLOTH_UMBRELLA_PERISHTIME = total_day_time*15*MY_PERISHTIME_MODIFIER,
+        VOIDCLOTH_UMBRELLA_PERISHTIME = total_day_time*15,
         VOIDCLOTH_UMBRELLA_DAMAGE = wilson_attack,
 		VOIDCLOTH_UMBRELLA_DOME_RADIUS = 16,
 		VOIDCLOTH_UMBRELLA_DOME_RATE = 1.5,
@@ -7008,7 +7004,7 @@ function Tune(overrides)
 
         -- Wolfgang, Woodie, Wormwood Skill Trees
 
-        WALKING_STICK_PERISHTIME = 4 * total_day_time*MY_PERISHTIME_MODIFIER,
+        WALKING_STICK_PERISHTIME = 4 * total_day_time,
         LEIF_IDOL_NUM_SPAWNS = 2,
         LEIF_IDOL_SPAWN_RADIUS = 10,
 

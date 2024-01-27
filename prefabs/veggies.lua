@@ -444,6 +444,11 @@ local function MakeVeggie(name, has_seeds)
         inst.components.edible.healthvalue = TUNING.HEALING_TINY / 2
         inst.components.edible.hungervalue = TUNING.CALORIES_TINY
 
+        inst:AddComponent("perishable")
+        inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
+        inst.components.perishable:StartPerishing()
+        inst.components.perishable.onperishreplacement = "spoiled_food"
+
         inst:AddComponent("cookable")
         inst.components.cookable.product = "seeds_cooked"
 
